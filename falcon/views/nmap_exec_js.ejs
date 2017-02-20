@@ -1,0 +1,167 @@
+<script>
+$(document).ready(function(){
+    $("#startScan_btn").click(function(){
+		var table = document.getElementById("scan_data");
+		var isFirst = true;
+		if(table.rows.length !== 1){
+			$("#scan_data").find("tr").each(function(){
+				if(!isFirst)
+					$(this).remove();
+				else
+					isFirst = false;
+			});
+		}
+		var scanIp = $("input[name='scan']").val();
+		var targetType = $("#targetType_sel option:selected").text();
+		if(scanIp.length === 0){
+			alert("请输入扫描目标IP");
+        }
+		else{
+      $.ajax({
+        url: "/api/nmap",
+        data: {
+          target: scanIp,
+          spec: targetType
+          },
+        type: "POST",
+        dataType : "json",
+      })
+
+      .done(function( json ) {
+        setTimeout(function () { pullExec(json.id) } , 1000);
+				$("#loading").modal('show');
+      })
+      // Code to run if the request fails; the raw request and
+      // status codes are passed to the function
+      .fail(function( xhr, status, errorThrown ) {
+        alert( "Sorry, there was a problem!" );
+        console.log( "Error: " + errorThrown );
+        console.log( "Status: " + status );
+        console.dir( xhr );
+      })
+
+		}
+	});
+});
+
+
+function pullExec(id) {
+  $.ajax({
+    url: "/api/nmap",
+    data: {
+      id: id
+      },
+    type: "GET",
+    dataType : "json",
+  })
+
+  .done(function( json ) {
+    if (json.status == "running") {
+      setTimeout(function (){ pullExec(json.id) } , 1000);
+    }else {
+			$("#loading").modal('hide');
+      displayResult(json);
+    }
+  })
+  // Code to run if the request fails; the raw request and
+  // status codes are passed to the function
+  .fail(function( xhr, status, errorThrown ) {
+    alert( "Sorry, there was a problem!" );
+    console.log( "Error: " + errorThrown );
+    console.log( "Status: " + status );
+    console.dir( xhr );
+  })
+}
+
+function displayResult(json) {
+  var obj = json;
+  var table = document.getElementById("scan_data");
+  for (var i =  0 , len = obj.data[0].openPorts.length; i < len ; i++) {
+    var currentRow = table.rows.length;
+    var row = table.insertRow(currentRow);
+            var cell0 = row.insertCell(0);
+		var portObj = obj.data[0].openPorts[i];
+    cell0.innerHTML = portObj.port.portid;
+    var cell1 = row.insertCell(1);
+    cell1.innerHTML = portObj.port.protocol;
+    var cell2 = row.insertCell(2);
+    cell2.innerHTML = portObj.service.name;
+    var cell3 = row.insertCell(3);
+    cell3.innerHTML = portObj.state.state;
+    var cell4 = row.insertCell(4);
+    cell4.innerHTML = 'true';
+		/*
+    if (obj.target.portList[i].isLegal == true){
+      row.style.color = "red";
+    }
+		*/
+  }
+}
+
+
+function downloadScanData(){
+	var xmlhttp;
+	var t ;
+	if(window.XMLHttpRequest)
+	{
+		xmlhttp = new XMLHttpRequest();
+
+	}else{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function(){
+		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			var obj = JSON.parse(xmlhttp.responseText);
+			if(obj.status === "updating"){
+				$("#update_modal").modal('show');
+			}else{
+				$("#update_modal").modal('hide');
+				clearTimeout(t);
+				showScanData();
+			}
+		}
+	}
+	xmlhttp.open("GET","/scanLoading.asp?function=downloadScanData",true);
+	xmlhttp.send();
+	t = setTimeout('downloadScanData()' , 1000);
+}
+
+function showScanData(){
+	var xmlhttp;
+	var t ;
+	if(window.XMLHttpRequest)
+	{
+		xmlhttp = new XMLHttpRequest();
+
+	}else{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function(){
+		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			var obj = JSON.parse(xmlhttp.responseText);
+			var table = document.getElementById("scan_data");
+			for(var i =  0 , len = obj.target.portList.length; i < len ; i++)
+			{
+				var currentRow = table.rows.length;
+				var row = table.insertRow(currentRow);
+                var cell0 = row.insertCell(0);
+				cell0.innerHTML = obj.target.portList[i].portid;
+				var cell1 = row.insertCell(1);
+				cell1.innerHTML = obj.target.portList[i].protocol;
+				var cell2 = row.insertCell(2);
+				cell2.innerHTML = obj.target.portList[i].service;
+				var cell3 = row.insertCell(3);
+				cell3.innerHTML = obj.target.portList[i].state;
+				var cell4 = row.insertCell(4);
+				cell4.innerHTML = obj.target.portList[i].isLegal;
+				if(obj.target.portList[i].isLegal == true){
+					row.style.color = "red";
+				}
+		    }
+		}
+	}
+	xmlhttp.open("GET","/scanDataPort.asp?function=showScanData",true);
+	xmlhttp.send();
+}
+
+</script>

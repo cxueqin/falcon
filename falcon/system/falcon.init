@@ -1,0 +1,32 @@
+
+#!/bin/bash
+
+SERVER="/mnt/hgfs/linux_share/newnodejs/web-controler.js";
+PROCESS=`ps -ef|grep $SERVER|grep -v grep|grep -v PPID|awk '{ print $2}'`;
+
+start(){
+	if [ $PROCESS ];then
+		echo "process is running"
+	else
+		node $SERVER &
+	fi
+}
+
+stop(){
+	if [ $PROCESS ];then
+		sudo kill -9 $PROCESS
+	else
+		echo "process is not running"
+	fi
+}
+
+case "$1" in
+	"start")
+	start;;
+	"stop")
+	stop;;
+	*)  
+     	echo "Usage: $0 {start|stop|restart|status|info}" ;
+     	exit 1  ;
+esac
+exit 0 ;

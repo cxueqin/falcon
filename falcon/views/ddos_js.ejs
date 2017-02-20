@@ -1,0 +1,298 @@
+<script src="/js/flot/excanvas.min.js"></script>
+<script src="/js/flot/jquery.flot.js"></script>
+<script src="/js/flot/jquery.flot.pie.js"></script>
+<script src="/js/flot/jquery.flot.resize.js"></script>
+<script src="/js/flot/jquery.flot.time.js"></script>
+<script src="/js/flot/jquery.flot.symbol.js"></script>
+
+<script>
+var started = false;
+var pullTimeout;
+
+var speedByteCurrent;
+var speedPacketCurrent;
+var speedByteMax;
+var speedPacketMax;
+
+function formatBytes(bytes, decimals) {
+   if(bytes == 0) return '0 Bytes';
+   var k = 1000,
+       dm = decimals + 1 || 3,
+       sizes = ['', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'],
+       i = Math.floor(Math.log(bytes) / Math.log(k));
+   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
+Traffic = function() {
+	this.speedByteCurrent = undefined;
+	this.speedPacketCurrent = undefined;
+	this.speedByteMax = undefined;
+	this.speedPacketMax = undefined;
+}
+
+Traffic.prototype = {
+		constructor: Traffic,
+
+		reset: function() {
+			this.firstTraffic = true;
+			this.speedByteCurrent = 0;
+			this.speedPacketCurrent = 0;
+			this.speedByteMax = 0;
+			this.speedPacketMax = 0;
+      this.speedByteMin = 0;
+      this.speedPacketMin = 0;
+			this.previousByte = 0;
+			this.previousPacket = 0;
+			this.packetCount = 0;
+      this.byteCount = 0;
+      this.data = new Array();
+		},
+
+		process: function(stat, t) {
+			if (this.firstTraffic ) {
+				this.speedByteMin = this.speedByteMax = this.speedByteCurrent = stat.byteSent;
+				this.speedPacketMin = this.speedPacketMax = this.speedPacketCurrent = stat.packetSent;
+				this.previousByte = stat.byteSent;
+				this.previousPacket = stat.packetSent;
+				this.firstTraffic = false;
+				this.packetCount = stat.packetSent;
+        this.byteCount = stat.byteSent;
+
+        for (var i=99; i>=1; i--) {
+          this.data.push([t-i*1000, null]);
+        }
+        this.data.push([t, this.speedByteCurrent]);
+				return;
+			}
+
+			this.speedByteCurrent = stat.byteSent - this.previousByte;
+			this.speedPacketCurrent = stat.packetSent - this.previousPacket;
+			if (this.speedByteCurrent > this.speedByteMax) {
+				this.speedByteMax = this.speedByteCurrent;
+			}
+      if (this.speedByteCurrent < this.speedByteMin) {
+				this.speedByteMin = this.speedByteCurrent;
+			}
+			if (this.speedPacketCurrent < this.speedPacketMin) {
+				this.speedPacketMin = this.speedPacketCurrent;
+			}
+			this.previousByte = stat.byteSent;
+			this.previousPacket = stat.packetSent;
+			this.packetCount = stat.packetSent;
+      this.byteCount = stat.byteSent;
+      this.data.shift();
+      this.data.push([t, this.speedByteCurrent]);
+		}
+}
+
+function updateTraffic(traffic) {
+	$("#speedByteCurrent").text(formatBytes(traffic.speedByteCurrent));
+	$("#speedPacketCurrent").text(formatBytes(traffic.speedPacketCurrent));
+	$("#speedByteMax").text(formatBytes(traffic.speedByteMax));
+	$("#speedPacketMax").text(formatBytes(traffic.speedPacketMax));
+  $("#speedByteMin").text(formatBytes(traffic.speedByteMin));
+	$("#speedPacketMin").text(formatBytes(traffic.speedPacketMin));
+	$("#packetCount").text(formatBytes(traffic.packetCount));
+  $("#byteCount").text(formatBytes(traffic.byteCount));
+
+  var dataset = [
+      { label: "DOS发送速度", data: traffic.data, color: "#00FF00" }
+  ];
+  var min = traffic.speedByteMin;
+  var max = traffic.speedByteMax;
+  options.yaxis.min = Math.round(min*0.8);
+  options.yaxis.max = Math.round(max*1.2);
+  options.yaxis.tickSize = (options.yaxis.max - options.yaxis.min )/20;
+  $.plot($("#flot-line-chart-moving"), dataset, options);
+
+}
+
+function startDDOS() {
+	var type = $("input[type='radio'][name='type']:checked").val();
+	var target = $("#ddos_target").val();
+
+	if (target.length == 0){
+		alert("请输入攻击目标IP");
+		return;
+	};
+	var traffic = new Traffic();
+	traffic.reset();
+	$.ajax({
+		url: "/api/ddos",
+		data: {
+			target: target,
+			type: type
+			},
+		type: "POST",
+		dataType : "json",
+	})
+
+	.done(function( json ) {
+		started = true;
+    //initData();
+		pullTimeout = setInterval(function () {
+		  pullTraffic(traffic) } , 1000);
+		//$("#loading").modal('show');
+		$("#startAttack_btn").text("停止");
+		$("#ddos_target").prop('disabled', true);
+		$("input[type='radio'][name='type']").prop('disabled', true);
+	})
+	// Code to run if the request fails; the raw request and
+	// status codes are passed to the function
+	.fail(function( xhr, status, errorThrown ) {
+		alert( "Sorry, there was a problem!" );
+		console.log( "Error: " + errorThrown );
+		console.log( "Status: " + status );
+		console.dir( xhr );
+	})
+
+}
+
+function stopDDOS() {
+  clearInterval(pullTimeout);
+  pullTimeout = undefined;
+	$.ajax({
+		url: "/api/ddos",
+		data: {
+			},
+		type: "DELETE",
+		dataType : "json",
+	})
+
+	.done(function( json ) {
+		started = false;
+		$("#startAttack_btn").text("开始");
+		$("#ddos_target").prop('disabled', false);
+		$("input[type='radio'][name='type']").prop('disabled', false);
+		//$("#loading").modal('show');
+	})
+	// Code to run if the request fails; the raw request and
+	// status codes are passed to the function
+	.fail(function( xhr, status, errorThrown ) {
+		alert( "Sorry, there was a problem!" );
+		console.log( "Error: " + errorThrown );
+		console.log( "Status: " + status );
+		console.dir( xhr );
+	})
+
+}
+
+$(document).ready(function(){
+    $("#startAttack_btn").click(function (){
+			if (started) {
+				stopDDOS();
+			} else {
+				startDDOS();
+			}
+		});
+});
+
+function pullTraffic(traffic) {
+  var t = new Date().getTime();
+  $.ajax({
+    url: "/api/ddos/traffic",
+    type: "GET",
+    dataType : "json",
+  })
+
+  .done(function( stat ) {
+		traffic.process(stat, t);
+		updateTraffic(traffic);
+    /*
+		if (started ) {
+			setTimeout(() => {
+				pullTraffic(traffic)
+			} , 1000);
+		}
+    */
+
+  })
+  // Code to run if the request fails; the raw request and
+  // status codes are passed to the function
+  .fail(function( xhr, status, errorThrown ) {
+    alert( "Sorry, there was a problem!" );
+    console.log( "Error: " + errorThrown );
+    console.log( "Status: " + status );
+    console.dir( xhr );
+  })
+}
+
+</script>
+
+<script>
+var data = [];
+var dataset;
+var totalPoints = 100;
+var updateInterval = 1000;
+
+
+function GetData(time) {
+    data.shift();
+    var y = Math.random() * 100;
+    var temp = [time, y];
+
+    data.push(temp);
+}
+
+var options = {
+    series: {
+        lines: {
+            show: true,
+            lineWidth: 1.2,
+            fill: true
+        }
+    },
+
+    xaxis: {
+        mode: "time",
+        tickSize: [1, "second"],
+        tickFormatter: function (v, axis) {
+            var date = new Date(v);
+            if (date.getSeconds() % 60 == 0) {
+                var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+
+                return hours + ":" + minutes;
+            }
+            if (date.getSeconds() % 10 == 0) {
+              var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+              return seconds;
+            }
+            return "";
+        },
+        axisLabel: "Time",
+        axisLabelUseCanvas: true,
+        axisLabelFontSizePixels: 12,
+        axisLabelFontFamily: 'Verdana, Arial',
+        axisLabelPadding: 10
+    },
+    yaxis: {
+        min: 0,
+        max: 100,
+        tickSize: 5,
+        tickFormatter: function (v, axis) {
+          var offset = (v - axis.min)/axis.tickSize;
+          return formatBytes(v);
+          if (offset %2 == 0) {
+            return formatBytes(v);
+          } else {
+            return '';
+          }
+        },
+        axisLabel: "BPS",
+        axisLabelUseCanvas: true,
+        axisLabelFontSizePixels: 12,
+        axisLabelFontFamily: 'Verdana, Arial',
+        axisLabelPadding: 6
+    },
+    legend: {
+        labelBoxBorderColor: "#fff"
+    },
+    grid: {
+        backgroundColor: "#000000",
+        tickColor: "#008040"
+    }
+};
+
+</script>

@@ -1,0 +1,92 @@
+{
+  "name": "falcon",
+  "description": "falcon network security toolkit",
+  "version": "1.0.0",
+  "author": {
+    "name": "chen xueqin",
+    "email": "7219530@qq.com"
+  },
+  "contributors": [
+    {
+      "name": "Lin Xiao",
+      "email": "814265730@qq.com"
+    }
+  ],
+  "license": "LGPL v2.1",
+  "repository": {
+    "type": "git",
+    "url": "https://git.oschina.net/cxueqin/falcon.git"
+  },
+  "homepage": "http://git.oschina.net/cxueqin/falcon",
+  "keywords": [
+    "ddos",
+    "nmap",
+    "TDD",
+    "network security"
+  ],
+
+  "dependencies": {
+    "node-nmap": "3.0.3",
+    "ini-config-parser": "1.0.2",
+    "authenticate-pam": "1.0.2",
+    "body-parser": "1.15.2",
+    "express": "4.14.0",
+    "xmlreader": "0.2.3",
+    "xml-writer": "1.6.0",
+    "cookie-parser": "1.4.3",
+    "multer": "1.2.0",
+    "express-session": "1.14.2",
+    "ejs": "2.5.5",
+	  "sprintf-js": "1.0.3",
+    "modern-syslog": "1.1.4",
+    "lowdb": "0.14.0",
+    "express-paginate": "0.2.2",
+    "underscore-db": "0.12.2"
+  },
+
+  "devDependencies": {
+    "mocha": "2.5.3",
+    "morgan": "~1.7.0",
+    "should": "9.0.2",
+    "sleep": "5.1.0",
+    "chai": "3.5.0"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "files": [
+    "LICENSE",
+    "History.md",
+    "Readme.md",
+    "index.js",
+    "public",
+    "lib",
+    "system",
+    "views",
+    "test",
+    "routes",
+    "nmap",
+    "ddos"
+  ],
+  "scripts": {
+    "test": "mocha --reporter spec --bail --check-leaks test/ddos test/nmap/"
+  },
+  "gitHead": "",
+  "bugs": {
+    "url": "http://git.oschina.net/cxueqin/falcon/issues"
+  },
+  "_id": "falcon@1.0.0",
+  "_shasum": "c1ee3f42cdc891fb3dc650a8922d51ec847d0d66",
+  "_from": "express@latest",
+  "_npmVersion": "3.10.8",
+  "_npmUser": {
+    "name": "chen xueqin",
+    "email": "chenxq@star-net.cn"
+  },
+  "maintainers": [
+    {
+      "name": "chen xueqin",
+      "email": "7210530@qq.com"
+    }
+  ]
+}

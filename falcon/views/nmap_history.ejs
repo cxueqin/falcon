@@ -1,0 +1,122 @@
+
+<% include head %>
+<!--<div id="wrapper">-->
+<% include nav %>
+<!-- /.内容-->
+<div id="page-wrapper">
+    <div class="row">
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    历史记录
+                </div>
+                <div class="panel-body">
+                    <table width="100%" class="table  table-hover" id="record_table">
+                            <!--<caption class="text-center">扫描历史</caption>-->
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>时间</th>
+                                <th>主机</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="recordTable_body">
+                          <% for(var i=0; i<results.length; i++) {%>
+                             <tr>
+                               <td><%= results[i].index %></td>
+                               <td><%= results[i].timeString %></td>
+                               <td><%= results[i].host %></td>
+                               <td><button
+                                 type='button'
+                                 class='btn btn-default'
+                                 onclick='viewBtn("<%= results[i].id %>")'
+                                 data-toggle='modal'
+                                 data-target='#viewRecord_modal' >
+                                 查看</button></td>
+                             </tr>
+                          <% } %>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation">
+                      <ul class="pagination">
+                        <% if (paginate.hasPreviousPages) {%>
+                        <li>
+                          <a href='<%= paginate.href(true) %>' aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                        <% } %>
+
+                        <% for(var i=0; i<pages.length; i++) {
+                           var page = pages[i];
+                        %>
+                            <li>
+                              <a href='<%= page.url %>'>
+                                  <%= page.number %>
+                              </a>
+                            </li>
+                        <% } %>
+
+                        <% if (paginate.hasNextPages(pageCount)) {%>
+                        <li>
+                          <a href='<%= paginate.href(false) %>'  aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                        <% } %>
+
+                      </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="modal fade" id="viewRecord_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true" id="close_btn">×
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            扫描历史记录
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-lg-12 text-left">
+                            <h4>目标地址:<span class="label label-default" id="targetIp_span"></span></h4>
+                        </div>
+                        <div class="col-lg-12 text-left">
+                            <h4>扫描时间:<span class="label label-default" id="time_span"></span></h4>
+                        </div>
+                        <table class="table table-hover table-bordered table-striped" id="history_table">
+                            <caption class="text-center">端口列表</caption>
+                            <thead>
+                                <tr class="text-center">
+                                    <th>端口号</th>
+                                    <th>端口协议</th>
+                                    <th>端口服务</th>
+                                    <th>端口状态</th>
+                                    <th>端口合法</th>
+                                </tr>
+                            </thread>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+    </div>
+</div>
+<% include nmap_history_js %>
+<!-- /.内容-->
+<!--</div>-->
+<% include foot %>

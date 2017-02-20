@@ -1,0 +1,81 @@
+<script>
+
+function utilTimeToStr(t) {
+  var date = new Date();
+
+  date.setTime(t);
+  return sprintf("%d/%02d/%02d %02d:%02d",
+    date.getFullYear(),
+    date.getMonth()+1,
+    date.getDate(),
+    date.getHours(),
+    date.getMinutes());
+}
+
+function viewBtn(id){
+	var isFirst = true;
+	$("#history_table").find("tr").each(function(){
+		if(!isFirst)
+			$(this).remove();
+		else
+			isFirst = false;
+	});
+  pullExec(id);
+}
+
+function pullExec(id) {
+  $.ajax({
+    url: "/api/nmap",
+    data: {
+      id: id
+      },
+    type: "GET",
+    dataType : "json",
+  })
+
+  .done(function( json ) {
+    if (json.status == "running") {
+      setTimeout(function (){ pullExec(json.id) } , 1000);
+    }else {
+      displayResult(json);
+    }
+  })
+  // Code to run if the request fails; the raw request and
+  // status codes are passed to the function
+  .fail(function( xhr, status, errorThrown ) {
+    alert( "Sorry, there was a problem!" );
+    console.log( "Error: " + errorThrown );
+    console.log( "Status: " + status );
+    console.dir( xhr );
+  })
+}
+
+function displayResult(json) {
+  var obj = json;
+  $("#targetIp_span").text(obj.host);
+	$("#time_span").text(obj.timeString);
+
+  var table = document.getElementById("history_table");
+  for (var i =  0 , len = obj.data[0].openPorts.length; i < len ; i++) {
+    var currentRow = table.rows.length;
+    var row = table.insertRow(currentRow);
+            var cell0 = row.insertCell(0);
+		var portObj = obj.data[0].openPorts[i];
+    cell0.innerHTML = portObj.port.portid;
+    var cell1 = row.insertCell(1);
+    cell1.innerHTML = portObj.port.protocol;
+    var cell2 = row.insertCell(2);
+    cell2.innerHTML = portObj.service.name;
+    var cell3 = row.insertCell(3);
+    cell3.innerHTML = portObj.state.state;
+    var cell4 = row.insertCell(4);
+    cell4.innerHTML = 'true';
+		/*
+    if (obj.target.portList[i].isLegal == true){
+      row.style.color = "red";
+    }
+		*/
+  }
+}
+
+</script>

@@ -1,0 +1,155 @@
+
+<% include head %>
+<!--<div id="wrapper">-->
+<% include nav %>
+<!-- /.内容-->
+<div id="page-wrapper">
+    <div class="row">
+        <br />
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                 主机规格
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-striped" id="type_table">
+                        <caption class="text-center">规格列表</caption>
+                            <thead>
+                                <tr class="text-center">
+                                    <th>#</th>
+                                    <th>规格名称</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thread>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-4">
+                        <button type="button" class="btn btn-primary  btn-lg btn-block" id="addStandard_btn"  data-toggle='modal' data-target='#addStandard_modal'>增加规格</button>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="addStandard_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  style="table-layout:fixed;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" id="closeAddStandard_btn"
+                                                    aria-hidden="true">×
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                    添加规格
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <div class="col-lg-3">
+                                            <label>规格类型:</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input class="form-control" placeholder="请输入规格类型" name="standardType">
+                                        </div>
+                                    </div>
+                                </form>
+                                <table class="table table-hover table-bordered table-striped" id="addStandard_table">
+                                    <caption class="text-center">规格信息</caption>
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th width="100">端口号</th>
+                                                <th width="100">端口协议</th>
+                                                <th width="100">端口服务</th>
+                                                <th width="100">端口操作</th>
+                                            </tr>
+                                        </thread>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" id="addStandardPort_btn">
+                                    添加
+                                </button>
+                                <button type="button" class="btn btn-default" id="delStandardPort_btn">
+                                    删除
+                                </button>
+                                <button type="button" class="btn btn-primary" id="submitStandardPort_btn">
+                                    提交
+                                </button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+
+                <div class="modal fade" id="viewStandard_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" id="closeView_btn"
+                                                    aria-hidden="true">×
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                                合法端口列表
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-hover table-bordered table-striped" id="viewData_table">
+                                    <caption class="text-center">合法端口列表</caption>
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th>端口号</th>
+                                                <th>端口协议</th>
+                                                <th>端口服务</th>
+                                            </tr>
+                                        </thread>
+                                </table>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+                <div class="modal fade" id="reviseStandard_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" id="closeRevise_btn"
+                                                    aria-hidden="true">×
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                                合法端口列表
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-hover table-bordered table-striped" id="reviseData_table" style="table-layout:fixed;">
+                                    <caption class="text-center">合法端口列表</caption>
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th width="100">端口号</th>
+                                                <th width="100">端口协议</th>
+                                                <th width="100">端口服务</th>
+                                                <th width="100">端口操作</th>
+                                            </tr>
+                                        </thread>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" id="add_btn">
+                                    添加
+                                </button>
+                                <button type="button" class="btn btn-default" id="del_btn">
+                                    删除
+                                </button>
+                                <button type="button" class="btn btn-primary" id="submit_btn">
+                                    提交更改
+                                </button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.内容-->
+<!--</div>-->
+<% include foot %>

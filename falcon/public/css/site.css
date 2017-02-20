@@ -1,0 +1,59 @@
+
+.row11
+{
+
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+ min-height: 100vh; /* These two lines are counted as one :-)       */
+
+ display: flex;
+ align-items: center;
+
+}
+
+.navbar-cornor {
+    float: left;
+    padding: 7.5px 7.5px;
+}
+
+.pagination {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+}
+
+.col-lg-6 .panel .panel-body .col-sm-4 {
+  padding-right: 3px;
+  padding-left: 3px;
+}
+
+.col-lg-6 .panel .panel-body .col-sm-6 {
+  padding-right: 3px;
+  padding-left: 3px;
+}
+
+
+.col-lg-6 .panel .panel-body .row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.panel-heading h3.panel-title {
+  font-size: 12px;
+}
+
+.ddos-stat {
+  padding-top: 2px;
+  padding-bottom:  2px;
+}
+
+.feature-item {
+  padding-top: 10px;
+  padding-bottom:  0px;
+  font-size: 18px;
+}
+
+.feature-heading {
+  font-size: 24px;
+  text-align: center;
+}

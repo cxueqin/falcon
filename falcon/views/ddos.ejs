@@ -1,0 +1,165 @@
+
+<% include head %>
+<!--<div id="wrapper">-->
+<% include nav %>
+<!-- /.内容-->
+<div id="page-wrapper">
+    <div class="row">
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    DDOS攻击测试
+                </div>
+                <div class="panel-body">
+                    <form role="form" method="POST">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="">
+                              <label>请选择攻击类型：</label>
+                          </div>
+                        </div>
+                        <div class="col-md-9 col-md-offset-3 ">
+                          <div class="radio">
+                              <label>
+                                  <input type="radio" name="type" id="optionsRadios1" value="icmp" checked>ICMP
+                              </label>
+                          </div>
+                          <div class="radio">
+                              <label>
+                                  <input type="radio" name="type" id="optionsRadios2" value="tcp">TCP
+                              </label>
+                          </div>
+                          <div class="radio">
+                              <label>
+                                  <input type="radio" name="type" id="optionsRadios3" value="udp">UDP
+                              </label>
+                          </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>请输入攻击ip：</label>
+                            <input class="form-control" placeholder="请输入ip" name="target" id="ddos_target">
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <button type="button" class="btn btn-primary  btn-lg btn-block" id="startAttack_btn" >开始</button>
+                        </div>
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    攻击实时统计数据
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="panel panel-success">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">当前每秒发送(PPS)</h3>
+                          </div>
+                          <div id='speedPacketCurrent' class="panel-body ddos-stat">
+                            &nbsp;
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="panel panel-success">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">最高每秒发送(PPS)</h3>
+                          </div>
+                          <div id='speedPacketMax' class="panel-body ddos-stat">
+                            &nbsp;
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="panel panel-success">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">最低每秒发送(PPS)</h3>
+                          </div>
+                          <div id='speedPacketMin' class="panel-body ddos-stat">
+                            &nbsp;
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="panel panel-info">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">当前每秒发送(BPS)</h3>
+                          </div>
+                          <div id='speedByteCurrent' class="panel-body ddos-stat">
+                           &nbsp;
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="panel panel-info">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">最高每秒发送(BPS)</h3>
+                          </div>
+                          <div id='speedByteMax' class="panel-body ddos-stat">
+                           &nbsp;
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="panel panel-info">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">最低每秒发送(BPS)</h3>
+                          </div>
+                          <div id='speedByteMin' class="panel-body ddos-stat">
+                            &nbsp;
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="panel panel-warning">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">总共发送(Packet)</h3>
+                          </div>
+                          <div id='packetCount' class="panel-body ddos-stat">
+                           &nbsp;
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="panel panel-warning">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">总共发送(Byte)</h3>
+                          </div>
+                          <div id='byteCount' class="panel-body ddos-stat">
+                           &nbsp;
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    攻击流量曲线图
+                </div>
+                <div class="panel-body">
+                    <div class="flot-chart">
+                        <div class="flot-chart-content" id="flot-line-chart-moving"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.内容-->
+<!--</div>-->
+<% include ddos_js %>
+<% include foot %>

@@ -1,0 +1,19 @@
+[Unit]
+Description=falcon server daemon
+Documentation=man:falcon(8) 
+After=network.target 
+;Wants=
+
+[Service]
+Type=simple
+User=admin
+Group=admin
+EnvironmentFile=/etc/sysconfig/sshd
+ExecStart=/usr/bin/node /home/robbie/falcon_project/nepartakak/falcon $OPTIONS
+;ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
