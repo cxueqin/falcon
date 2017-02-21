@@ -13,10 +13,13 @@
   3. 安装nmap工具
      sudo yum install nmap
 
-  4. 在猎鹰主程序包
+  4. 安装依赖库
+     sudo yum install pam-devel   #若遗漏此步,安装authenticate-pam时会报头文件缺少错误
+
+  5. 安装猎鹰主程序包
      cd /path/to/falcon
      cd falcon      #注意本项目下还有一个falcon目录
-     npm install
+     npm install    
 
 其它平台注意：
      对于Ubuntu 12.04而言，注意需要安装gcc-4.8以及g++-4.8环境,
@@ -26,7 +29,13 @@
 =========
   1. 先启动dos守护程序
      sudo /usr/local/sbin/td &
-  2. 执行测试，看核心模块是否工作正常(记住：测试驱动的思想)
+
+  2. 安装配置文件
+     cd /path/to/falcon
+     cd falcon
+     cp system/falcon.conf  /etc/falcon.conf  #猎鹰遵守*Nix配置标准
+
+  3. 执行测试，看核心模块是否工作正常(记住：测试驱动的思想)
      cd /path/to/falcon
      cd falcon
      npm test     #大部分测试应该是通过的
