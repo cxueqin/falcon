@@ -44,7 +44,7 @@ function NmapManager(home) {
   //初始化时，先要初始化数据为合法方式，否则insert插入不了
   //this.db.setState({'results': []});
   //初始化后，就可以调用insert接口，数据将自动存储
-  this.db.defaults( {results: []} )
+  this.db.defaults( {results: []} ).write()
   //this.db.get('results').push({a:"aaa"})
 }
 
@@ -60,6 +60,7 @@ NmapManager.prototype = {
     if (scan) {
       var row = { host: scan.range[0], time: _.now(), status: 'running'}
       item = this.db.get('results').insert(row).value()
+      this.db.write()
     }
     return item;
   },
@@ -70,13 +71,16 @@ NmapManager.prototype = {
     var clone = item.value();
     clone.data = data;
     clone.status = 'done';
-    return item.assign(clone).value()
+    item.assign(clone)
+    this.db.write()
+    return clone;
   },
 
   delResult : function (rid) {
     //必须加value()方可触发写入，切记
     var item = this.db.get('results').removeById(rid).value()
     if (item) {
+      this.db.write();
       return 0;
     } else {
       return -1
