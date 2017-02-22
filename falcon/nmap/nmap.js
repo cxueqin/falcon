@@ -70,8 +70,8 @@ var nodenmap;
         NmapScan.prototype.initializeChildProcess = function () {
             var _this = this;
             this.startTimer();
-            console.log("location: " +nodenmap.nmapLocation);
-            console.log("command: " +this.command);
+            //console.log("location: " +nodenmap.nmapLocation);
+            //console.log("command: " +this.command);
             this.child = spawn(nodenmap.nmapLocation, this.command);
             process.on('SIGINT', this.killChild);
             process.on('uncaughtException', this.killChild);
@@ -126,7 +126,8 @@ var nodenmap;
                 else {
                     _this.rawJSON = result;
                     results = _this.convertRawJsonToScanResults(_this.rawJSON, function (err) {
-                        console.log(_this.rawJSON);
+                        //console.log(_this.rawJSON);
+						//console.log(`Error converting raw json to cleans can results ${err}`);
                         _this.emit('error', "Error converting raw json to cleans can results: " + err + ": " + _this.rawJSON);
                     });
                     _this.scanComplete(results);

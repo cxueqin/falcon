@@ -1,7 +1,7 @@
 var assert = require('assert');
 var FloodAgent = require('../../ddos/agent');
-const AGENT_IP = "192.168.177.51";
-const TARGET_IP = "192.168.177.51";
+const AGENT_IP = "127.0.0.1";
+const TARGET_IP = "127.0.0.1";
 
 describe('FloodAgent Interface Static Test', function() {
   var agent;

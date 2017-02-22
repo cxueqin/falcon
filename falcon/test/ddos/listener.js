@@ -76,7 +76,7 @@ describe('FloodListener Interface Dynamic Test', function() {
     }, 1000);
   });
 
-  it('should handle packet correctly when receive invalid report packet', function() {
+  it('should handle packet correctly when receive invalid report packet', function(done) {
     var dgram = require('dgram');
     var message = new Buffer("Something Wrong");
     var client = dgram.createSocket("udp4");

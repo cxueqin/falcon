@@ -5,7 +5,7 @@ var FloodListener = require('../../ddos/listener');
 var sleep = require('sleep').sleep;
 
 const AGENT_IP = "127.0.0.1";
-const TARGET_IP = "10.18.87.101";
+const TARGET_IP = "127.0.0.1";
 
 describe('FloodController Interface Static Test', function() {
   var controller;
