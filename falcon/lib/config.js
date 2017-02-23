@@ -16,7 +16,7 @@ var _ = require('lodash');
 function ConfigManager(path) {
   //参数必须赋值，否则抛出异常
   if (!path || !fs.existsSync(path)) {
-    throw new TypeError('arg path must be real filesytem path')
+    throw new Error(`lack of falcon config file ${path}`)
   }
 
   var data = fs.readFileSync(path).toString();

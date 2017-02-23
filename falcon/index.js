@@ -11,9 +11,13 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var paginate = require('express-paginate');
 
-var app = module.exports = express();
 var logger = require('./lib/logger');
 var ConfigManager = require('./lib/config');
+var env = require('./lib/env');
+// 检查运行环境是否满足要求
+env.validate();
+
+var app = module.exports = express();
 
 const PAGE_LIMIT = 10;
 const PAGE_MAX_LIMIT = 50;
