@@ -4,7 +4,7 @@
   * 本帮助假定以运行猎鹰的用户账号为admin,先在系统中创建账号
      useradd -d /home/admin -m -c "security user" admin  #CentOS下创建用户
      passwd admin  #设置密码admin
-  * 猎鹰支持CentOS、Ubuntu、MacOS
+  * 猎鹰支持CentOS、Ubuntu、MacOS、树莓派
 
 安装(以centos 7.2为例)
 ====================
@@ -30,8 +30,10 @@
      npm install    
 
 其它平台注意：
-     对于Ubuntu 12.04而言，注意需要安装gcc-4.8以及g++-4.8环境,
-     否者nodejs环境使用了c++11的特性，会出现编译错误.
+     1. 对于Ubuntu 12.04而言，默认系统是gcc-4.7,需要升级到gcc-4.8以及g++-4.8环境, 否者nodejs环境使用了c++11的特性，会出现编译错误. 升级方法见
+     http://askubuntu.com/questions/271388/how-to-install-gcc-4-8
+     2. 对于Ubuntu环境，需要安装pam开发包，否则npm install编译authenticate-pam时会出现错误,安装命令
+       sudo apt-get install libpam0g-dev
 
 运行前准备
 =========
