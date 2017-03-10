@@ -5,6 +5,7 @@
  *
  * 本软件在GNU LGPL-V2.1协议下发布，欢迎使用.
  */
+const debug = require('debug')('nmap');
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -71,7 +72,7 @@ var nodenmap;
             var _this = this;
             this.startTimer();
             //console.log("location: " +nodenmap.nmapLocation);
-            //console.log("command: " +this.command);
+            debug("spawn command: %j", this.command);
             this.child = spawn(nodenmap.nmapLocation, this.command);
             process.on('SIGINT', this.killChild);
             process.on('uncaughtException', this.killChild);
@@ -85,20 +86,19 @@ var nodenmap;
                 }
             });
             this.child.stderr.on("data", function (err) {
-                _this.error = err.toString();
-                console.log("error found:" + _this.error);
+                debug("error found:" + err.toString());
             });
             this.child.on("close", function () {
+                debug("nmap process close output: %s", _this.rawData);
                 process.removeListener('SIGINT', _this.killChild);
                 process.removeListener('uncaughtException', _this.killChild);
                 process.removeListener('exit', _this.killChild);
                 if (_this.error) {
                     _this.emit('error', _this.error);
                 }
-                else if (_this.cancelled === true) {
+                if (_this.cancelled === true) {
                     _this.emit('error', "Over scan timeout " + _this.scanTimeout);
-                }
-                else {
+                } else {
                     _this.rawDataHandler(_this.rawData);
                 }
             });
@@ -130,6 +130,7 @@ var nodenmap;
 						//console.log(`Error converting raw json to cleans can results ${err}`);
                         _this.emit('error', "Error converting raw json to cleans can results: " + err + ": " + _this.rawJSON);
                     });
+                    debug("scanComplete: %j", results)
                     _this.scanComplete(results);
                 }
             });
@@ -150,7 +151,8 @@ var nodenmap;
                         hostname: null,
                         ip: null,
                         mac: null,
-                        openPorts: []
+                        openPorts: [],
+                        osNmap: ""
                     };
                     //Check if the hostname is avaialble.  \r\n or \n is what will return if not available.
                     if (xmlInput[hostLoopIter]['hostnames'][0] !== "\r\n" && xmlInput[hostLoopIter]['hostnames'][0] !== "\n") {
@@ -170,36 +172,27 @@ var nodenmap;
                         }
                     }
                     //check if port list is available
+                    debug("xml ports: %j", xmlInput[hostLoopIter]["ports"]);
                     if (xmlInput[hostLoopIter]["ports"] && xmlInput[hostLoopIter]["ports"][0]["port"]) {
                         //for each port scanned
                         for (var portLoopIter = 0; portLoopIter < xmlInput[hostLoopIter]["ports"][0]["port"].length; portLoopIter++) {
                             var portItem = xmlInput[hostLoopIter]["ports"][0]["port"][portLoopIter]['$'];
                             var stateItem = xmlInput[hostLoopIter]["ports"][0]["port"][portLoopIter]['state'][0]['$'];
-                            var serviceItem = xmlInput[hostLoopIter]["ports"][0]["port"][portLoopIter]['service'][0]['$'];
-                            tempHostList[hostLoopIter].openPorts.push({"port": portItem, "state": stateItem, "service": serviceItem});
-
-                            //if the state of the port is open
-                            if (xmlInput[hostLoopIter]["ports"][0]["port"][portLoopIter]['state'][0]['$']['state'] === 'open1') {
-                                //Get the port number
-                                var port = parseInt(xmlInput[hostLoopIter]["ports"][0]["port"][portLoopIter]['$']['portid']);
-                                //Get the port name
-                                var service = xmlInput[hostLoopIter]["ports"][0]["port"][portLoopIter]['service'][0]['$']['name'];
-                                tempHostList[hostLoopIter].openPorts.push({"port": port, "service": service});
-/*
-                                tempHostList[hostLoopIter].openPorts[portLoopIter].port =
-
-                                if (xmlInput[hostLoopIter]["ports"][0]["port"][portLoopIter]['service']) {
-                                    tempHostList[hostLoopIter].openPorts[portLoopIter].service =
-                                }
-*/
+                            var serviceNode = xmlInput[hostLoopIter]["ports"][0]["port"][portLoopIter]['service'];
+                            /*Note: service probe may not be available when port number is not ordinary*/
+                            if (serviceNode) {
+                              var serviceItem = serviceNode[0]['$'];
+                            }else {
+                              var serviceItem = { name: 'unknown'};
                             }
+                            tempHostList[hostLoopIter].openPorts.push(
+                              {"port": portItem,
+                              "state": stateItem,
+                              "service": serviceItem});
                         }
                     }
                     if (xmlInput[hostLoopIter].os && xmlInput[hostLoopIter].os[0].osmatch && xmlInput[hostLoopIter].os[0].osmatch[0].$.name) {
                         tempHostList[hostLoopIter].osNmap = xmlInput[hostLoopIter].os[0].osmatch[0].$.name;
-                    }
-                    else {
-                        tempHostList[hostLoopIter].osNmap = null;
                     }
                 }
                 ;

@@ -33,6 +33,10 @@ router.post('/api/nmap', function(req, res){
   scan.on('complete', function (data) {
     manager.updateResult( result, data)
   });
+  //nmap调用可能失败，故在调用方必须增加容错处理
+  scan.on('error', function (data) {
+    //manager.updateResult( result, data)
+  });
   //必须手工设定，否则返回304 Not Modified
   res.status(200).json(result);
   logger.debug("result %s", util.inspect(result, {depth: null}));
