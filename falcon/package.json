@@ -40,7 +40,8 @@
     "underscore-db": "0.12.2",
     "queued-up": "^2.0.2",
     "xml2js": "^0.4.15",
-    "debug": "^2.6.1"
+    "debug": "^2.6.1",
+    "lodash": "^4.17.4"
   },
 
   "devDependencies": {
