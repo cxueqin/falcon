@@ -35,13 +35,45 @@ ConfigManager.prototype = {
     return this.config.daemon.datadir+"/nmap";
   },
 
+  getSSL: function () {
+    var port = this.config.daemon.port_ssl;
+
+    if ( !port ) {
+      throw new Error(`missing port_ssl config`);
+    }
+    var portInt = parseInt(port, 10);
+    if (isNaN(portInt)) {
+      throw new Error(`port_ssl ${port} invalid`);
+    }
+
+    if (portInt < 1024 || portInt > 65535) {
+      throw new Error(`port_ssl ${port} range invalid`);
+    }
+
+    var key = this.config.daemon.key;
+    var cert = this.config.daemon.cert;
+    if (!key || !fs.existsSync(key)) {
+      throw new Error(`missing private key file ${key}`);
+    }
+
+    if (!cert || !fs.existsSync(cert)) {
+      throw new Error(`missing cerificate key file ${cert}`);
+    }
+
+    return {
+      port: port,
+      key: fs.readFileSync(key),
+      cert: fs.readFileSync(cert)
+    };
+  },
+
   getPort: function () {
     var port = this.config.daemon.port;
 
     if ( !port )
       return DEFAULT_PORT;
     var portInt = parseInt(port, 10);
-    if (!isNaN(portInt))
+    if (isNaN(portInt))
       return DEFAULT_PORT;
     if (portInt < 1024 || portInt > 65535)
       return DEFAULT_PORT;

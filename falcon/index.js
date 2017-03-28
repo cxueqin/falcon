@@ -75,5 +75,18 @@ app.use(error);
 if (!module.parent) {
   var port = ConfigManager.getPort();
   app.listen(port);
-  logger.info('Falcon service started on port %s', port);
+  logger.info('Falcon service started on http port %s', port);
+
+  try {
+    var options = ConfigManager.getSSL();
+    var https = require('https');
+
+    https.createServer(options, app).listen(options.port, () => {
+      logger.info('Falcon service started on https port %s', options.port);
+    });
+
+  } catch (e) {
+    logger.debug('Falcon https disabled (%s)', e.message);
+  } finally {
+  }
 }
