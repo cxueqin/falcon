@@ -36,13 +36,17 @@
      cd falcon      #注意本项目下还有一个falcon目录
      npm install    
 ```
-其它平台注意：
-     1. 对于Ubuntu 12.04而言，默认系统是gcc-4.7,需要升级到gcc-4.8以及g++-4.8环境, 否者nodejs环境使用了c++11的特性，会出现编译错误. 升级方法见
+
+其它平台注意
+===========
+  1. 对于Ubuntu 12.04而言，默认系统是gcc-4.7,需要升级到gcc-4.8以及g++-4.8环境, 否者nodejs环境使用了c++11的特性，会出现编译错误. 升级方法见
      http://askubuntu.com/questions/271388/how-to-install-gcc-4-8
-     2. 对于Ubuntu环境，需要安装pam开发包，否则npm install编译authenticate-pam时会出现错误,安装命令
+
+  2. 对于Ubuntu环境，需要安装pam开发包，否则npm install编译authenticate-pam时会出现错误,安装命令
 ```sh
        sudo apt-get install libpam0g-dev
 ```
+
 运行前准备
 =========
   1. 先启动dos守护程序
