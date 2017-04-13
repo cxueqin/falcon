@@ -22,6 +22,7 @@ function validate() {
     }
   }
 
+  //TODO: 检查nodejs的版本，太低则拒绝运行
   //TODO: 检查nmap是否可用,dos测试命令是否可用，用程序做到必要检查,让用户可自行发现问题
 }
 

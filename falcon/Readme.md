@@ -22,9 +22,9 @@
      make  #中间若有输入密码,则输入8个字母或数字，回车即可
      sudo cp td  tfn /usr/local/sbin
 ```
-  3. 安装nmap工具
+  3. 安装nodejs、nmap工具,推荐使用nodejs 6.9或更高版本
 ```sh
-     sudo yum install nmap     
+     sudo yum install nodejs npm nmap     
 ```
   4. 安装依赖库
 ```sh
@@ -45,6 +45,13 @@
   2. 对于Ubuntu环境，需要安装pam开发包，否则npm install编译authenticate-pam时会出现错误,安装命令
 ```sh
        sudo apt-get install libpam0g-dev
+```
+  3. 对于CentOS 6平台，需要注意安装nodejs 6.9更高版本，需要将gcc编译器升级至支持c++11的版本，升级方法可参考此文
+      http://hiltmon.com/blog/2015/08/09/c-plus-plus-11-on-centos-6-dot-6/
+    升级之后,需要确保启用高版本gcc，再用npm install安装相关的模块，否则会报告如下编译错误
+```
+npm ERR! authenticate-pam@1.0.2 install: `node-gyp build`
+npm ERR! Exit status 1
 ```
 
 运行前准备

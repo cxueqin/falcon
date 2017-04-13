@@ -24,26 +24,25 @@
     "TDD",
     "network security"
   ],
-
   "dependencies": {
     "authenticate-pam": "1.0.2",
-    "body-parser": "^1.16.1",
-    "cookie-parser": "1.4.3",
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.6.3",
     "ejs": "^2.5.6",
-    "express": "^4.14.1",
-    "express-paginate": "0.2.2",
-    "express-session": "^1.15.1",
-    "ini-config-parser": "1.0.2",
+    "express": "^4.15.2",
+    "express-paginate": "^0.2.2",
+    "express-session": "^1.15.2",
+    "ini-config-parser": "^1.0.3",
+    "lodash": "^4.17.4",
     "lowdb": "^0.15.5",
-    "modern-syslog": "1.1.4",
+    "modern-syslog": "^1.1.4",
+    "queued-up": "^2.0.2",
+    "should": "^11.2.1",
     "sprintf-js": "1.0.3",
     "underscore-db": "0.12.2",
-    "queued-up": "^2.0.2",
-    "xml2js": "^0.4.15",
-    "debug": "^2.6.1",
-    "lodash": "^4.17.4"
+    "xml2js": "^0.4.15"
   },
-
   "devDependencies": {
     "mocha": "^3.2.0",
     "morgan": "^1.7.0",
