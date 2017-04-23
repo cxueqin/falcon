@@ -44,15 +44,13 @@ app.use(session({
 // Session-persisted message middleware
 
 app.use(function(req, res, next){
-  var err = req.session.error;
-  var msg = req.session.success;
-  delete req.session.error;
-  delete req.session.success;
-  res.locals.message = '';
-  if (err)
-    res.locals.message = '<p class="msg error">' + err + '</p>';
-  if (msg)
-    res.locals.message = '<p class="msg success">' + msg + '</p>';
+  var sess = req.session;
+  /* session test,just counter */
+  if (sess.views) {
+    sess.views++;
+  }else {
+    sess.views = 1;
+  }
   next();
 });
 
@@ -62,6 +60,7 @@ var login = require('./routes/login');
 var logout = require('./routes/logout');
 var nmap = require('./routes/nmap');
 var ddos = require('./routes/ddos');
+var ssl = require('./routes/ssl');
 var error = require('./routes/error');
 
 app.use(index);
@@ -69,6 +68,7 @@ app.use(login);
 app.use(logout);
 app.use(nmap);
 app.use(ddos);
+app.use(ssl);
 app.use(error);
 
 /* istanbul ignore next */

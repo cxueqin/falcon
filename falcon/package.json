@@ -68,7 +68,7 @@
     "ddos"
   ],
   "scripts": {
-    "test": "mocha --reporter spec --bail --check-leaks test/ddos test/nmap/"
+    "test": "mocha --reporter spec --bail --check-leaks test/ddos test/nmap/ test/"
   },
   "gitHead": "",
   "bugs": {

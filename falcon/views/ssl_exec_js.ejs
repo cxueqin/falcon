@@ -1,0 +1,98 @@
+<script>
+$(document).ready(function(){
+    $("#start").click(function(){
+
+		var host = $("input[id='host']").val();
+		var port = $("input[id='port']").val();
+		if (host.length === 0){
+			alert("请输入扫描主机名称或IP");
+      return;
+    }
+
+    $.ajax({
+      url: "/api/ssl",
+      data: {
+        host: host,
+        port: port
+        },
+      type: "POST"
+    })
+
+    .done(function( json ) {
+      setTimeout(function () { pullExec() } , 1000);
+    })
+    // Code to run if the request fails; the raw request and
+    // status codes are passed to the function
+    .fail(function( xhr, status, errorThrown ) {
+      alert( "Sorry, there was a problem!" );
+      console.log( "Error: " + errorThrown );
+      console.log( "Status: " + status );
+      console.dir( xhr );
+    })
+    $("#loading").modal('show');
+
+	});
+});
+
+
+function pullExec() {
+  $.ajax({
+    url: "/api/ssl",
+    data: {
+      },
+    type: "GET"
+  })
+
+  .done(function( result ) {
+    console.dir(result);
+    processResult(result);
+    displayResult(result);
+		$("#loading").modal('hide');
+  })
+  // Code to run if the request fails; the raw request and
+  // status codes are passed to the function
+  .fail(function( xhr, status, errorThrown ) {
+    if (status == '100') {
+      setTimeout(function (){ pullExec() } , 1000);
+      return;
+    }
+    alert( "Sorry, there was a problem!" );
+    console.log( "Error: " + errorThrown );
+    console.log( "Status: " + status );
+    console.dir( xhr );
+  })
+}
+
+/* 检查证书的4个标志：是否权威、是否在有效期内、身份是否相符、加密强度*/
+function processResult(result) {
+
+  result.summary = {}
+  result.summary.authority = true;
+  result.summary.noexpire = true;
+  result.summary.hostname = false;
+  result.summary.cipher = false;
+}
+
+function displayResult(result) {
+  //总揽
+  var t = result.summary;
+  var s = result.cert.subject;
+
+  $( "#home span" ).removeClass("glyphicon-ok glyphicon-remove");
+  /*
+  $( "#home .noexpire > span" ).removeClass("glyphicon-ok glyphicon-remove");
+  $( "#home .hostname > span" ).removeClass("glyphicon-ok glyphicon-remove");
+  $( "#home .cipher > span" ).removeClass("glyphicon-ok glyphicon-remove");
+  */
+  $( "#authority" ).addClass(t.authority?"glyphicon-ok":"glyphicon-remove");
+  $( "#noexpire" ).addClass(t.noexpire?"glyphicon-ok":"glyphicon-remove");
+  $( "#hostname" ).addClass(t.hostname?"glyphicon-ok":"glyphicon-remove");
+  $( "#cipher" ).addClass(t.cipher?"glyphicon-ok":"glyphicon-remove");
+
+  $( "#subject .country" ).val(s.C)
+  $( "#subject .state" ).val(s.ST)
+  $( "#subject .local" ).val(s.L)
+  $( "#subject .state" ).val(s.ST)
+
+}
+</script>

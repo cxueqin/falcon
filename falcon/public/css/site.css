@@ -57,3 +57,19 @@
   font-size: 24px;
   text-align: center;
 }
+
+.form-group {
+  /*margin-bottom: 0px;*/
+}
+
+.level1 {
+  text-indent: 0em;
+}
+
+.level2 {
+  text-indent: 1em;
+}
+
+.level3 {
+  text-indent: 2em;
+}

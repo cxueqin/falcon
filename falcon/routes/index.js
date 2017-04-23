@@ -22,7 +22,7 @@ function restrictAPI(req, res, next) {
   if (req.session.user) {
     next();
   } else {
-    req.status(500).end();
+    res.status(500).end();
   }
 }
 

@@ -24,7 +24,7 @@
 ```
   3. 安装nodejs、nmap工具,推荐使用nodejs 6.9或更高版本
 ```sh
-     sudo yum install nodejs npm nmap     
+     sudo yum install nodejs npm nmap
 ```
   4. 安装依赖库
 ```sh
