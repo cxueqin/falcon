@@ -1,0 +1,186 @@
+# Issuer: OU=Equifax Secure Certificate Authority,O=Equifax,C=US
+# Issuer: CN=GlobalSign Root CA,OU=Root CA,O=GlobalSign nv-sa,C=BE
+# Issuer: CN=GlobalSign,O=GlobalSign,OU=GlobalSign Root CA - R2
+# Issuer: CN=VeriSign Class 1 Public Primary Certification Authority - G3,OU="(c) 1999 VeriSign, Inc. - For authorized use only",OU=VeriSign Trust Network,O="VeriSign, Inc.",C=US
+# Issuer: CN=VeriSign Class 2 Public Primary Certification Authority - G3,OU="(c) 1999 VeriSign, Inc. - For authorized use only",OU=VeriSign Trust Network,O="VeriSign, Inc.",C=US
+# Issuer: CN=VeriSign Class 3 Public Primary Certification Authority - G3,OU="(c) 1999 VeriSign, Inc. - For authorized use only",OU=VeriSign Trust Network,O="VeriSign, Inc.",C=US
+# Issuer: CN=Entrust.net Certification Authority (2048),OU=(c) 1999 Entrust.net Limited,OU=www.entrust.net/CPS_2048 incorp. by ref. (limits liab.),O=Entrust.net
+# Issuer: CN=Baltimore CyberTrust Root,OU=CyberTrust,O=Baltimore,C=IE
+# Issuer: CN=AddTrust Class 1 CA Root,OU=AddTrust TTP Network,O=AddTrust AB,C=SE
+# Issuer: CN=AddTrust External CA Root,OU=AddTrust External TTP Network,O=AddTrust AB,C=SE
+# Issuer: CN=AddTrust Public CA Root,OU=AddTrust TTP Network,O=AddTrust AB,C=SE
+# Issuer: CN=AddTrust Qualified CA Root,OU=AddTrust TTP Network,O=AddTrust AB,C=SE
+# Issuer: CN=Entrust Root Certification Authority,OU="(c) 2006 Entrust, Inc.",OU=www.entrust.net/CPS is incorporated by reference,O="Entrust, Inc.",C=US
+# Issuer: CN=GeoTrust Global CA,O=GeoTrust Inc.,C=US
+# Issuer: CN=GeoTrust Global CA 2,O=GeoTrust Inc.,C=US
+# Issuer: CN=GeoTrust Universal CA,O=GeoTrust Inc.,C=US
+# Issuer: CN=GeoTrust Universal CA 2,O=GeoTrust Inc.,C=US
+# Issuer: CN=Visa eCommerce Root,OU=Visa International Service Association,O=VISA,C=US
+# Issuer: CN=Certum CA,O=Unizeto Sp. z o.o.,C=PL
+# Issuer: CN=AAA Certificate Services,O=Comodo CA Limited,L=Salford,ST=Greater Manchester,C=GB
+# Issuer: CN=Secure Certificate Services,O=Comodo CA Limited,L=Salford,ST=Greater Manchester,C=GB
+# Issuer: CN=Trusted Certificate Services,O=Comodo CA Limited,L=Salford,ST=Greater Manchester,C=GB
+# Issuer: CN=QuoVadis Root Certification Authority,OU=Root Certification Authority,O=QuoVadis Limited,C=BM
+# Issuer: CN=QuoVadis Root CA 2,O=QuoVadis Limited,C=BM
+# Issuer: CN=QuoVadis Root CA 3,O=QuoVadis Limited,C=BM
+# Issuer: OU=Security Communication RootCA1,O=SECOM Trust.net,C=JP
+# Issuer: CN=Sonera Class2 CA,O=Sonera,C=FI
+# Issuer: CN=UTN-USERFirst-Client Authentication and Email,OU=http://www.usertrust.com,O=The USERTRUST Network,L=Salt Lake City,ST=UT,C=US
+# Issuer: CN=UTN-USERFirst-Hardware,OU=http://www.usertrust.com,O=The USERTRUST Network,L=Salt Lake City,ST=UT,C=US
+# Issuer: CN=UTN-USERFirst-Object,OU=http://www.usertrust.com,O=The USERTRUST Network,L=Salt Lake City,ST=UT,C=US
+# Issuer: CN=Chambers of Commerce Root,OU=http://www.chambersign.org,O=AC Camerfirma SA CIF A82743287,C=EU
+# Issuer: CN=Global Chambersign Root,OU=http://www.chambersign.org,O=AC Camerfirma SA CIF A82743287,C=EU
+# Issuer: CN=XRamp Global Certification Authority,O=XRamp Security Services Inc,OU=www.xrampsecurity.com,C=US
+# Issuer: OU=Go Daddy Class 2 Certification Authority,O="The Go Daddy Group, Inc.",C=US
+# Issuer: OU=Starfield Class 2 Certification Authority,O="Starfield Technologies, Inc.",C=US
+# Issuer: CN=StartCom Certification Authority,OU=Secure Digital Certificate Signing,O=StartCom Ltd.,C=IL
+# Issuer: O=Government Root Certification Authority,C=TW
+# Issuer: CN=Swisscom Root CA 1,OU=Digital Certificate Services,O=Swisscom,C=ch
+# Issuer: CN=DigiCert Assured ID Root CA,OU=www.digicert.com,O=DigiCert Inc,C=US
+# Issuer: CN=DigiCert Global Root CA,OU=www.digicert.com,O=DigiCert Inc,C=US
+# Issuer: CN=DigiCert High Assurance EV Root CA,OU=www.digicert.com,O=DigiCert Inc,C=US
+# Issuer: CN=Class 2 Primary CA,O=Certplus,C=FR
+# Issuer: CN=DST Root CA X3,O=Digital Signature Trust Co.
+# Issuer: CN=DST ACES CA X6,OU=DST ACES,O=Digital Signature Trust,C=US
+# Issuer: CN=SwissSign Platinum CA - G2,O=SwissSign AG,C=CH
+# Issuer: CN=SwissSign Gold CA - G2,O=SwissSign AG,C=CH
+# Issuer: CN=SwissSign Silver CA - G2,O=SwissSign AG,C=CH
+# Issuer: CN=GeoTrust Primary Certification Authority,O=GeoTrust Inc.,C=US
+# Issuer: CN=thawte Primary Root CA,OU="(c) 2006 thawte, Inc. - For authorized use only",OU=Certification Services Division,O="thawte, Inc.",C=US
+# Issuer: CN=VeriSign Class 3 Public Primary Certification Authority - G5,OU="(c) 2006 VeriSign, Inc. - For authorized use only",OU=VeriSign Trust Network,O="VeriSign, Inc.",C=US
+# Issuer: CN=SecureTrust CA,O=SecureTrust Corporation,C=US
+# Issuer: CN=Secure Global CA,O=SecureTrust Corporation,C=US
+# Issuer: CN=COMODO Certification Authority,O=COMODO CA Limited,L=Salford,ST=Greater Manchester,C=GB
+# Issuer: CN=Network Solutions Certificate Authority,O=Network Solutions L.L.C.,C=US
+# Issuer: CN=COMODO ECC Certification Authority,O=COMODO CA Limited,L=Salford,ST=Greater Manchester,C=GB
+# Issuer: CN=Equifax Secure Global eBusiness CA-1,O=Equifax Secure Inc.,C=US
+# Issuer: CN=AC DGTPE Signature Authentification,O=DGTPE,C=FR
+# Issuer: OU=Security Communication EV RootCA1,O="SECOM Trust Systems CO.,LTD.",C=JP
+# Issuer: CN=OISTE WISeKey Global Root GA CA,OU=OISTE Foundation Endorsed,OU=Copyright (c) 2005,O=WISeKey,C=CH
+# Issuer: CN=Certigna,O=Dhimyotis,C=FR
+# Issuer: CN=AC Ra..z Certic..mara S.A.,O=Sociedad Cameral de Certificaci..n Digital - Certic..mara S.A.,C=CO
+# Issuer: CN=TC TrustCenter Class 3 CA II,OU=TC TrustCenter Class 3 CA,O=TC TrustCenter GmbH,C=DE
+# Issuer: CN=Deutsche Telekom Root CA 2,OU=T-TeleSec Trust Center,O=Deutsche Telekom AG,C=DE
+# Issuer: C=IL,O=ComSign,CN=ComSign CA
+# Issuer: C=IL,O=ComSign,CN=ComSign Secured CA
+# Issuer: CN=Cybertrust Global Root,O="Cybertrust, Inc"
+# Issuer: OU=ePKI Root Certification Authority,O="Chunghwa Telecom Co., Ltd.",C=TW
+# Issuer: CN=T..B..TAK UEKAE K..k Sertifika Hizmet Sa..lay..c..s.. - S..r..m ...,OU=Kamu Sertifikasyon Merkezi,OU=Ulusal Elektronik ve Kriptoloji Ara..t..rma Enstit..s.. - UEKAE,O=T..rkiye Bilimsel ve Teknolojik Ara..t..rma Kurumu - T..B..TAK,L=Gebze - Kocaeli,C=TR
+# Issuer: OU=certSIGN ROOT CA,O=certSIGN,C=RO
+# Issuer: CN=CNNIC ROOT,O=CNNIC,C=CN
+# Issuer: CN=GeoTrust Primary Certification Authority - G3,OU=(c) 2008 GeoTrust Inc. - For authorized use only,O=GeoTrust Inc.,C=US
+# Issuer: CN=thawte Primary Root CA - G2,OU="(c) 2007 thawte, Inc. - For authorized use only",O="thawte, Inc.",C=US
+# Issuer: CN=thawte Primary Root CA - G3,OU="(c) 2008 thawte, Inc. - For authorized use only",OU=Certification Services Division,O="thawte, Inc.",C=US
+# Issuer: CN=GeoTrust Primary Certification Authority - G2,OU=(c) 2007 GeoTrust Inc. - For authorized use only,O=GeoTrust Inc.,C=US
+# Issuer: CN=VeriSign Universal Root Certification Authority,OU="(c) 2008 VeriSign, Inc. - For authorized use only",OU=VeriSign Trust Network,O="VeriSign, Inc.",C=US
+# Issuer: CN=VeriSign Class 3 Public Primary Certification Authority - G4,OU="(c) 2007 VeriSign, Inc. - For authorized use only",OU=VeriSign Trust Network,O="VeriSign, Inc.",C=US
+# Issuer: CN=NetLock Arany (Class Gold) F..tan..s..tv..ny,OU=Tan..s..tv..nykiad..k (Certification Services),O=NetLock Kft.,L=Budapest,C=HU
+# Issuer: CN=Staat der Nederlanden Root CA - G2,O=Staat der Nederlanden,C=NL
+# Issuer: CN=Hongkong Post Root CA 1,O=Hongkong Post,C=HK
+# Issuer: CN=SecureSign RootCA11,O="Japan Certification Services, Inc.",C=JP
+# Issuer: C=ES,O=EDICOM,OU=PKI,CN=ACEDICOM Root
+# Issuer: E=info@e-szigno.hu,CN=Microsec e-Szigno Root CA 2009,O=Microsec Ltd.,L=Budapest,C=HU
+# Issuer: CN=GlobalSign,O=GlobalSign,OU=GlobalSign Root CA - R3
+# Issuer: CN=Autoridad de Certificacion Firmaprofesional CIF A62634068,C=ES
+# Issuer: CN=Izenpe.com,O=IZENPE S.A.,C=ES
+# Issuer: CN=Chambers of Commerce Root - 2008,O=AC Camerfirma S.A.,serialNumber=A82743287,L=Madrid (see current address at www.camerfirma.com/address),C=EU
+# Issuer: CN=Global Chambersign Root - 2008,O=AC Camerfirma S.A.,serialNumber=A82743287,L=Madrid (see current address at www.camerfirma.com/address),C=EU
+# Issuer: CN=UTN-USERFirst-Hardware,OU=http://www.usertrust.com,O=The USERTRUST Network,L=Salt Lake City,ST=UT,C=US
+# Issuer: CN=Go Daddy Root Certificate Authority - G2,O="GoDaddy.com, Inc.",L=Scottsdale,ST=Arizona,C=US
+# Issuer: CN=Starfield Root Certificate Authority - G2,O="Starfield Technologies, Inc.",L=Scottsdale,ST=Arizona,C=US
+# Issuer: CN=Starfield Services Root Certificate Authority - G2,O="Starfield Technologies, Inc.",L=Scottsdale,ST=Arizona,C=US
+# Issuer: CN=AffirmTrust Commercial,O=AffirmTrust,C=US
+# Issuer: CN=AffirmTrust Networking,O=AffirmTrust,C=US
+# Issuer: CN=AffirmTrust Premium,O=AffirmTrust,C=US
+# Issuer: CN=AffirmTrust Premium ECC,O=AffirmTrust,C=US
+# Issuer: CN=Certum Trusted Network CA,OU=Certum Certification Authority,O=Unizeto Technologies S.A.,C=PL
+# Issuer: CN=Certinomis - Autorit.. Racine,OU=0002 433998903,O=Certinomis,C=FR
+# Issuer: CN=TWCA Root Certification Authority,OU=Root CA,O=TAIWAN-CA,C=TW
+# Issuer: E=info@diginotar.nl,CN=DigiNotar Root CA,O=DigiNotar,C=NL
+# Issuer: E=info@diginotar.nl,CN=DigiNotar Services 1024 CA,O=DigiNotar,C=NL
+# Issuer: E=info@diginotar.nl,CN=DigiNotar Cyber CA,O=DigiNotar,C=NL
+# Issuer: CN=DigiNotar Cyber CA,O=DigiNotar,C=NL
+# Issuer: CN=DigiNotar PKIoverheid CA Overheid en Bedrijven,O=DigiNotar B.V.,C=NL
+# Issuer: CN=DigiNotar PKIoverheid CA Organisatie - G2,O=DigiNotar B.V.,C=NL
+# Issuer: CN=GTE CyberTrust Global Root,OU="GTE CyberTrust Solutions, Inc.",O=GTE Corporation,C=US
+# Issuer: CN=Entrust.net Certification Authority (2048),OU=(c) 1999 Entrust.net Limited,OU=www.entrust.net/CPS_2048 incorp. by ref. (limits liab.),O=Entrust.net
+# Issuer: OU=Security Communication RootCA2,O="SECOM Trust Systems CO.,LTD.",C=JP
+# Issuer: CN=EC-ACC,OU=Jerarquia Entitats de Certificacio Catalanes,OU=Vegeu https://www.catcert.net/verarrel (c)03,OU=Serveis Publics de Certificacio,O=Agencia Catalana de Certificacio (NIF Q-0801176-I),C=ES
+# Issuer: CN=Hellenic Academic and Research Institutions RootCA 2011,O=Hellenic Academic and Research Institutions Cert. Authority,C=GR
+# Issuer: E=ca@trustwave.com,CN="Trustwave Organization Issuing CA, Level 2",O="Trustwave Holdings, Inc.",L=Chicago,ST=Illinois,C=US
+# Issuer: CN=Actalis Authentication Root CA,O=Actalis S.p.A./03358520967,L=Milan,C=IT
+# Issuer: OU=Trustis FPS Root CA,O=Trustis Limited,C=GB
+# Issuer: CN=StartCom Certification Authority,OU=Secure Digital Certificate Signing,O=StartCom Ltd.,C=IL
+# Issuer: CN=StartCom Certification Authority G2,O=StartCom Ltd.,C=IL
+# Issuer: CN=Buypass Class 2 Root CA,O=Buypass AS-983163327,C=NO
+# Issuer: CN=Buypass Class 3 Root CA,O=Buypass AS-983163327,C=NO
+# Issuer: CN=T-TeleSec GlobalRoot Class 3,OU=T-Systems Trust Center,O=T-Systems Enterprise Services GmbH,C=DE
+# Issuer: E=pki@sk.ee,CN=EE Certification Centre Root CA,O=AS Sertifitseerimiskeskus,C=EE
+# Issuer: O=T..RKTRUST Bilgi ..leti..im ve Bili..im G..venli..i Hizmetleri A...,C=TR,CN=T..RKTRUST Elektronik Sunucu Sertifikas.. Hizmetleri
+# Issuer: O=T..RKTRUST Bilgi ..leti..im ve Bili..im G..venli..i Hizmetleri A...,L=Ankara,C=TR,CN=T..RKTRUST Elektronik Sertifika Hizmet Sa..lay..c..s..
+# Issuer: CN=D-TRUST Root Class 3 CA 2 2009,O=D-Trust GmbH,C=DE
+# Issuer: CN=D-TRUST Root Class 3 CA 2 EV 2009,O=D-Trust GmbH,C=DE
+# Issuer: E=acraiz@suscerte.gob.ve,OU=Superintendencia de Servicios de Certificacion Electronica,O=Sistema Nacional de Certificacion Electronica,ST=Distrito Capital,L=Caracas,C=VE,CN=Autoridad de Certificacion Raiz del Estado Venezolano
+# Issuer: CN=China Internet Network Information Center EV Certificates Root,O=China Internet Network Information Center,C=CN
+# Issuer: CN=Swisscom Root CA 2,OU=Digital Certificate Services,O=Swisscom,C=ch
+# Issuer: CN=Swisscom Root EV CA 2,OU=Digital Certificate Services,O=Swisscom,C=ch
+# Issuer: CN=CA Disig Root R1,O=Disig a.s.,L=Bratislava,C=SK
+# Issuer: CN=CA Disig Root R2,O=Disig a.s.,L=Bratislava,C=SK
+# Issuer: C=ES,O=ACCV,OU=PKIACCV,CN=ACCVRAIZ1
+# Issuer: CN=TWCA Global Root CA,OU=Root CA,O=TAIWAN-CA,C=TW
+# Issuer: CN=TeliaSonera Root CA v1,O=TeliaSonera
+# Issuer: CN=E-Tugra Certification Authority,OU=E-Tugra Sertifikasyon Merkezi,O=E-Tu..ra EBG Bili..im Teknolojileri ve Hizmetleri A....,L=Ankara,C=TR
+# Issuer: CN=T-TeleSec GlobalRoot Class 2,OU=T-Systems Trust Center,O=T-Systems Enterprise Services GmbH,C=DE
+# Issuer: C=DE,O=Atos,CN=Atos TrustedRoot 2011
+# Issuer: CN=QuoVadis Root CA 1 G3,O=QuoVadis Limited,C=BM
+# Issuer: CN=QuoVadis Root CA 2 G3,O=QuoVadis Limited,C=BM
+# Issuer: CN=QuoVadis Root CA 3 G3,O=QuoVadis Limited,C=BM
+# Issuer: CN=DigiCert Assured ID Root G2,OU=www.digicert.com,O=DigiCert Inc,C=US
+# Issuer: CN=DigiCert Assured ID Root G3,OU=www.digicert.com,O=DigiCert Inc,C=US
+# Issuer: CN=DigiCert Global Root G2,OU=www.digicert.com,O=DigiCert Inc,C=US
+# Issuer: CN=DigiCert Global Root G3,OU=www.digicert.com,O=DigiCert Inc,C=US
+# Issuer: CN=DigiCert Trusted Root G4,OU=www.digicert.com,O=DigiCert Inc,C=US
+# Issuer: CN=Certification Authority of WoSign,O=WoSign CA Limited,C=CN
+# Issuer: CN=CA ...............,O=WoSign CA Limited,C=CN
+# Issuer: CN=COMODO RSA Certification Authority,O=COMODO CA Limited,L=Salford,ST=Greater Manchester,C=GB
+# Issuer: CN=USERTrust RSA Certification Authority,O=The USERTRUST Network,L=Jersey City,ST=New Jersey,C=US
+# Issuer: CN=USERTrust ECC Certification Authority,O=The USERTRUST Network,L=Jersey City,ST=New Jersey,C=US
+# Issuer: CN=GlobalSign,O=GlobalSign,OU=GlobalSign ECC Root CA - R4
+# Issuer: CN=GlobalSign,O=GlobalSign,OU=GlobalSign ECC Root CA - R5
+# Issuer: CN=VeriSign Class 3 Public Primary Certification Authority - G5,OU="(c) 2006 VeriSign, Inc. - For authorized use only",OU=VeriSign Trust Network,O="VeriSign, Inc.",C=US
+# Issuer: CN=Staat der Nederlanden Root CA - G3,O=Staat der Nederlanden,C=NL
+# Issuer: CN=Staat der Nederlanden EV Root CA,O=Staat der Nederlanden,C=NL
+# Issuer: CN=IdenTrust Commercial Root CA 1,O=IdenTrust,C=US
+# Issuer: CN=IdenTrust Public Sector Root CA 1,O=IdenTrust,C=US
+# Issuer: CN=S-TRUST Universal Root CA,OU=S-TRUST Certification Services,O=Deutscher Sparkassen Verlag GmbH,C=DE
+# Issuer: CN=Entrust Root Certification Authority - G2,OU="(c) 2009 Entrust, Inc. - for authorized use only",OU=See www.entrust.net/legal-terms,O="Entrust, Inc.",C=US
+# Issuer: CN=Entrust Root Certification Authority - EC1,OU="(c) 2012 Entrust, Inc. - for authorized use only",OU=See www.entrust.net/legal-terms,O="Entrust, Inc.",C=US
+# Issuer: CN=CFCA EV ROOT,O=China Financial Certification Authority,C=CN
+# Issuer: CN=CNNIC ROOT,O=CNNIC,C=CN
+# Issuer: CN=T..RKTRUST Elektronik Sertifika Hizmet Sa..lay..c..s.. H5,O=T..RKTRUST Bilgi ..leti..im ve Bili..im G..venli..i Hizmetleri A....,L=Ankara,C=TR
+# Issuer: CN=Certinomis - Root CA,OU=0002 433998903,O=Certinomis,C=FR
+# Issuer: CN=OISTE WISeKey Global Root GB CA,OU=OISTE Foundation Endorsed,O=WISeKey,C=CH
+# Issuer: CN=Certification Authority of WoSign G2,O=WoSign CA Limited,C=CN
+# Issuer: CN=CA WoSign ECC Root,O=WoSign CA Limited,C=CN
+# Issuer: CN=SZAFIR ROOT CA2,O=Krajowa Izba Rozliczeniowa S.A.,C=PL
+# Issuer: CN=Certum Trusted Network CA 2,OU=Certum Certification Authority,O=Unizeto Technologies S.A.,C=PL
+# Issuer: CN=Hellenic Academic and Research Institutions RootCA 2015,O=Hellenic Academic and Research Institutions Cert. Authority,L=Athens,C=GR
+# Issuer: CN=Hellenic Academic and Research Institutions ECC RootCA 2015,O=Hellenic Academic and Research Institutions Cert. Authority,L=Athens,C=GR
+# Issuer: CN=Certplus Root CA G1,O=Certplus,C=FR
+# Issuer: CN=Certplus Root CA G2,O=Certplus,C=FR
+# Issuer: CN=OpenTrust Root CA G1,O=OpenTrust,C=FR
+# Issuer: CN=OpenTrust Root CA G2,O=OpenTrust,C=FR
+# Issuer: CN=OpenTrust Root CA G3,O=OpenTrust,C=FR
+# Issuer: CN=ISRG Root X1,O=Internet Security Research Group,C=US
+# Issuer: OU=AC RAIZ FNMT-RCM,O=FNMT-RCM,C=ES
+# Issuer: CN=Amazon Root CA 1,O=Amazon,C=US
+# Issuer: CN=Amazon Root CA 2,O=Amazon,C=US
+# Issuer: CN=Amazon Root CA 3,O=Amazon,C=US
+# Issuer: CN=Amazon Root CA 4,O=Amazon,C=US
+# Issuer: CN=LuxTrust Global Root 2,O=LuxTrust S.A.,C=LU
+# Issuer: CN=Symantec Class 1 Public Primary Certification Authority - G6,OU=Symantec Trust Network,O=Symantec Corporation,C=US
+# Issuer: CN=Symantec Class 2 Public Primary Certification Authority - G6,OU=Symantec Trust Network,O=Symantec Corporation,C=US
+# Issuer: CN=Symantec Class 1 Public Primary Certification Authority - G4,OU=Symantec Trust Network,O=Symantec Corporation,C=US
+# Issuer: CN=Symantec Class 2 Public Primary Certification Authority - G4,OU=Symantec Trust Network,O=Symantec Corporation,C=US
+# Issuer: CN=D-TRUST Root CA 3 2013,O=D-Trust GmbH,C=DE
+# Issuer: CN=TUBITAK Kamu SM SSL Kok Sertifikasi - Surum 1,OU=Kamu Sertifikasyon Merkezi - Kamu SM,O=Turkiye Bilimsel ve Teknolojik Arastirma Kurumu - TUBITAK,L=Gebze - Kocaeli,C=TR

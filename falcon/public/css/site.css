@@ -73,3 +73,15 @@
 .level3 {
   text-indent: 2em;
 }
+
+.level4 {
+  text-indent: 3em;
+}
+
+#ssl-result .glyphicon-ok {
+  color: green;
+}
+
+#ssl-result .glyphicon-remove {
+  color: red;
+}

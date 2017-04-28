@@ -45,8 +45,8 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-12">
-        <div class="panel panel-default">
+    <div class="col-lg-12" id="ssl-result">
+        <div class="panel panel-default" >
             <div class="panel-heading">
                 检测结果
             </div>
@@ -72,47 +72,47 @@
                   </ul>
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade in active" role="tabpanel" id="home" aria-labelledby="home-tab">
-                      <p class="feature-item "><span id="authority" class="glyphicon glyphicon-ok" aria-hidden="true"></span> 证书来源于权威机构</p>
-                      <p class="feature-item "><span id="noexpire" class="glyphicon glyphicon-remove" aria-hidden="true"></span> 证书时间有效</p>
-                      <p class="feature-item "><span id="hostname" class="glyphicon glyphicon-ok" aria-hidden="true"></span> 证书主体身份与实际相吻合</p>
-                      <p class="feature-item cipher"><span id="cipher" class="glyphicon glyphicon-ok" aria-hidden="true"></span> 证书加密强度符合要求</p>
+                      <p class="feature-item "><span id="authority" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> 证书来源于权威机构</p>
+                      <p class="feature-item "><span id="noexpire" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> 证书时间有效</p>
+                      <p class="feature-item "><span id="hostname" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> 证书主体身份与实际相吻合</p>
+                      <p class="feature-item cipher"><span id="cipher" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> 证书加密强度符合要求</p>
                     </div>
                     <div class="tab-pane fade" role="tabpanel" id="subject" aria-labelledby="subject-tab">
                       <form class="form-horizontal">
                         <div class="form-group">
                           <label class="col-sm-2 control-label">国家</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static country" id="country">CN</p>
+                            <p class="form-control-static country" ></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">省／市／自治区</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static state" id="state">beijing</p>
+                            <p class="form-control-static state" ></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">所在地</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static" id="local">beijing</p>
+                            <p class="form-control-static local" ></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">组织单位</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static" id="ou">service operation department.</p>
+                            <p class="form-control-static ou"></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">组织</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static">BeiJing Baidu Netcom Science Technology Co., Ltd</p>
+                            <p class="form-control-static o" id="o"></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">常用名称</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static">baidu.com</p>
+                            <p class="form-control-static cn"></p>
                           </div>
                         </div>
                       </form>
@@ -123,25 +123,25 @@
                         <div class="form-group">
                           <label class="col-sm-2 control-label">国家</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static">US</p>
+                            <p class="form-control-static country"></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">组织单位</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static">Symantec Trust Network</p>
+                            <p class="form-control-static ou"></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">组织</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static">Symantec Corporation</p>
+                            <p class="form-control-static o"></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">常用名称</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static">Symantec Class 3 Secure Server CA - G4</p>
+                            <p class="form-control-static cn"></p>
                           </div>
                         </div>
                       </form>
@@ -152,38 +152,39 @@
                         <div class="form-group">
                           <label class="col-sm-2 control-label">有效期开始于</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static">Aug 15 00:00:00 2016 GMT</p>
+                            <p class="form-control-static from"></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">有效期结束于</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static">Aug 16 23:59:59 2017 GMT</p>
+                            <p class="form-control-static to"></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">公钥算法</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static">RSA</p>
+                            <p class="form-control-static cipher"></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">公钥位数</label>
                           <div class="col-sm-10">
-                            <p class="form-control-static">2048</p>
+                            <p class="form-control-static pub-key-len"></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">公共密钥</label>
                           <div class="col-sm-10">
-                            <textarea class="form-control" rows="8" >C8 99 0F 0B 42 DE BF A2 F4 B2 13 58 DC E4 CE E4 9C 0E F2 0C 73 9B 65 40 3C 3A 01 BC 72 29 A5 DD A3 CA 0D BB 95 43 42 4B 72 E1 64 44 16 FB E2 75 71 7B D1 00 C2 03 7B 34 CA D2 2F 47 52 4E 5D A9 62 89 CC 7E 49 63 EF 29 9F AF E2 CA 52 28 28 3B C4 A8 D5 72 94 B2 7B 6A E8 A5 3B FE A5 D1 23 84 E9 77 DC E8 5A 84 D7 51 23 20 33 70 6F 8C DF 6D CA 8C 2C F4 64 A6 BF 67 E8 31 44 6C 9C ED 34 6B 3E 18 21 39 CC D9 B5 6E 92 5B A2 EA 3E 13 7E 44 6E 03 FB B2 A5 C2 CF 46 B6 4C E9 79 F1 46 F1 EB CE 7B 0C 09 9E 4D C2 AA 4E 41 E0 D0 B9 00 86 68 5A A4 28 F1 65 6E 2F 11 6F E2 CF 14 02 02 52 69 AA 16 99 62 B7 A6 9C EE 0B D0 78 B0 4D DC 17 89 C7 53 EE E0 99 A0 A1 24 CF 29 4D 0E B5 1B 50 B6 E5 DA 63 AF A8 AA 91 86 3F D8 2A BC 4E 5E 59 8C B6 60 F0 36 01 EA 23 9A 23 6C 48 FA F3 7F C6 C3</textarea>
+                            <textarea class="form-control pub-key-val" rows="8" ></textarea>
                           </div>
                         </div>
                       </form>
                     </div>
 
                     <div class="tab-pane fade" role="tabpanel" id="ssl-path" aria-labelledby="ssl-path-tab">
-                      <% include ssl-path %>
+                      <ul class="list-group" id="cert-chain">
+                      </ul>
                     </div>
                   </div>
                 </div>

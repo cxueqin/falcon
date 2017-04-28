@@ -41,6 +41,23 @@ router.post('/api/ssl', function(req, res){
   }
   ssl_state = 'running';
   logger.debug("start to check ssl certificate %s:%s", host, port);
+  /*USE  callback api */
+  sslCertficate.connect(host, port, (err, cert) => {
+    if (err) {
+      ssl_error = 400;
+      ssl_state = 'done';
+      logger.warn('ssl connect to %s:%s error(%s)', host, port, err.message);
+    }else {
+      ssl_state = 'done';
+      ssl_cert = cert;
+      ssl_error = 0;
+      logger.debug("ssl connect to %s:%s done", host, port);
+    }
+  });
+  /*
+  FIXME: ssl promise API has some circular bug in result
+  */
+  /*
   sslCertficate.get(host, port).then((cert)=> {
     ssl_state = 'done';
     ssl_cert = cert;
@@ -51,6 +68,7 @@ router.post('/api/ssl', function(req, res){
     ssl_error = 400;
     ssl_state = 'done';
   })
+  */
   res.status(200).end();
 });
 
@@ -71,6 +89,7 @@ router.get('/api/ssl', function(req, res){
   if (ssl_cert) {
     result.cert = ssl_cert;
   }
+  console.dir(ssl_cert);
   res.status(200).json(result);
 });
 

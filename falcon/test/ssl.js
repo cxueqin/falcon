@@ -28,8 +28,24 @@ describe('SSL Certficate Interface  Test', function() {
       assert.equal(cert.subject.C, "CN");
       assert.equal(cert.subject.ST, "beijing")
       assert.equal(cert.subject.O, "BeiJing Baidu Netcom Science Technology Co., Ltd")
+      assert.equal(cert.cipher.name, "ECDHE-RSA-AES128-GCM-SHA256")
       done();
     })
+  });
+
+  it('Aliyun SSL test', function(done) {
+    this.timeout(10000);
+    sslCertficate.connect('www.aliyun.com', 443, (err, cert) => {
+      assert.ok(!err);
+      assert.equal(cert.subject.C, "CN");
+      assert.equal(cert.subject.ST, "ZheJiang")
+      assert.equal(cert.subject.L, "HangZhou")
+      assert.equal(cert.subject.O, "Alibaba (China) Technology Co., Ltd.")
+      assert.equal(cert.cipher.name, "ECDHE-ECDSA-AES128-GCM-SHA256");
+      //console.dir(cert);
+      done();
+    });
+
   });
 
   it('Fail to get certificate with wrong ssl port', function() {
