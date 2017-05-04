@@ -2,14 +2,15 @@
 =======
   * 强烈建议用户以非root用户运行猎鹰程序,符合系统安全规定
   * 本帮助假定以运行猎鹰的用户账号为admin,先在系统中创建账号
-```sh
-     useradd -d /home/admin -m -c "security user" admin  #CentOS下创建用户
+  ```sh
+     useradd -d /home/admin -m -c "security user" admin  #CentOS下创建用户     
      passwd admin  #设置密码admin     
-```
+  ```
   * 猎鹰支持CentOS、Ubuntu、MacOS、树莓派
 
-安装(以centos 7.2为例)
+安装
 ====================
+  请按顺序执行以下步骤(以centos 7.2为例)
   1. 以admin账号，获取源码包
 ```sh
      cd /home/admin
@@ -56,6 +57,7 @@ npm ERR! Exit status 1
 
 运行前准备
 =========
+  请顺序执行以下步骤，使得猎鹰运行环境就绪
   1. 先启动dos守护程序
 ```sh
      sudo /usr/local/sbin/td &
