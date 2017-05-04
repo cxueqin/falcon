@@ -85,3 +85,7 @@
 #ssl-result .glyphicon-remove {
   color: red;
 }
+
+#page-wrapper .feature {
+  margin-top: 15px;
+}

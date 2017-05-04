@@ -28,7 +28,7 @@
 ```
   4. 安装依赖库
 ```sh
-     sudo yum install pam-devel   #若遗漏此步,安装authenticate-pam时会报头文件缺少错误
+     sudo yum install pam-devel gcc-c++  #若遗漏此步,安装authenticate-pam时会报头文件缺少错误
 ```
   5. 安装猎鹰主程序包
 ```sh
