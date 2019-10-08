@@ -1,11 +1,10 @@
-
 <% include head %>
 <!--<div id="wrapper">-->
 <% include nav %>
 <!-- /.内容-->
 <div id="page-wrapper">
     <div class="row">
-        <br/>
+        <br />
     </div>
     <div class="col-lg-12">
         <div class="panel panel-default">
@@ -27,22 +26,62 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-3 text-right">
-                                <label>规格选择</label>
+                                <label>端口选择</label>
+
                             </div>
-                            <div class="col-lg-6">
-                                <select class="form-control" id="targetType_sel">
-                                    <option></option>
-                                </select>
+
+                            <div class="col-lg-5">
+                                <div class="" id="div-portrange">
+                                    <div class="col-row-6" id="rangeBar">
+                                        <!-- <span class="label range-span">1-100<i class="icon icon-times" onclick="cancelRange(this)"></i></span> -->
+                                    </div>
+                                    <div class="col-row-1">
+                                        <div class="radio" id="div-radiogroup">
+                                            <label>
+                                                <input type="radio" name="radioOptions" id="radio1" checked="true" > 添加端口范围
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="radioOptions" id="radio2"> 添加单个端口
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-row-5">
+                                        <div id="div-range">
+                                        <span>端口号:</span>
+                                        <input type="text" id="targetType_sel_star" class="rush-input">
+                                        <span>至</span>
+                                        <input type="text" id="targetType_sel_end" class="rush-input">
+                                        <div class="btn-group btngroup-enter-cancel " id="">
+                                            <button type="button" class="btn" id="" onclick="addRange()">确定</button>
+                                            <button type="button" class="btn " id="" onclick="closeAddRange(this)">取消</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="div-single">
+                                    <span>端口号:</span>
+                                    <input type="text" id="targetType_sel_single" class="rush-input">
+                                    <div class="btn-group btngroup-enter-cancel" id="">
+                                        <button type="button" class="btn" id="single-enter-btn" onclick="addSingle()">确定</button>
+                                        <button type="button" class="btn " id="" onclick="closeAddRange()">取消</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="btn-group">
+                                    <button type="button" class="btn " id="btn-addrange">添加端口查詢范围</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </form>
-                <div class="row">
-                    <div class="col-lg-4">
-                    </div>
-                    <div class="col-lg-4">
-                        <button type="button" class="btn btn-primary  btn-lg btn-block" id = "startScan_btn">开始扫描</button>
-                    </div>
+            </div>
+            </form>
+            <div class="row">
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-4">
+                    <button type="button" class="btn btn-primary  btn-lg btn-block" id="startScan_btn">开始扫描</button>
                 </div>
             </div>
         </div>
@@ -69,134 +108,171 @@
             </div>
         </div>
     </div>
-    <style>
-    #loading{
-      /*copy from
+</div>
+
+<style>
+    #loading {
+        /*copy from
       http://www.cnblogs.com/wenzheshen/p/5888786.html
       http://simbyone.com/
       */
-    	height: 100%;
-    	width: 100%;
-    	position: absolute;
-    	z-index: 9999;
-    	margin-top: 0px;
-    	top: 0px;
-      left: 0px;
-      overflow: hidden;
-      outline: 0;
-      -webkit-overflow-scrolling: touch;
-      background-color: rgb(0, 0, 0);
-      filter: alpha(opacity=60);
-      background-color: rgba(0, 0, 0, 0.6);
-      z-index: 9999;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 9999;
+        margin-top: 0px;
+        top: 0px;
+        left: 0px;
+        overflow: hidden;
+        outline: 0;
+        -webkit-overflow-scrolling: touch;
+        background-color: rgb(0, 0, 0);
+        filter: alpha(opacity=60);
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
 
     }
-    #loading-center{
-    	width: 100%;
-    	height: 100%;
-    	position: absolute;
-    	}
+
+    #loading-center {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+
     #loading-center-absolute {
-    	position: absolute;
-    	left: 50%;
-    	top: 50%;
-    	height: 200px;
-    	width: 200px;
-    	margin-top: -100px;
-    	margin-left: -100px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        height: 200px;
+        width: 200px;
+        margin-top: -100px;
+        margin-left: -100px;
 
     }
-    .object{
+
+    .object {
         -moz-border-radius: 50% 50% 50% 50%;
-    	-webkit-border-radius: 50% 50% 50% 50%;
-    	border-radius: 50% 50% 50% 50%;
-    	position: absolute;
-    	border-left: 5px solid #FFF;
-    	border-right: 5px solid #FFF;
-    	border-top: 5px solid transparent;
-    	border-bottom: 5px solid transparent;
-    	-webkit-animation: animate 2s infinite;
-    	animation: animate 2s infinite;
-    	}
+        -webkit-border-radius: 50% 50% 50% 50%;
+        border-radius: 50% 50% 50% 50%;
+        position: absolute;
+        border-left: 5px solid #FFF;
+        border-right: 5px solid #FFF;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        -webkit-animation: animate 2s infinite;
+        animation: animate 2s infinite;
+    }
 
-    #object_one{
-    	left: 75px;
-    	top: 75px;
-    	width: 50px;
-    	height: 50px;
-    	}
+    #object_one {
+        left: 75px;
+        top: 75px;
+        width: 50px;
+        height: 50px;
+    }
 
-    #object_two{
-    	left: 65px;
-    	top: 65px;
-    	width: 70px;
-    	height: 70px;
-    	-webkit-animation-delay: 0.1s;
+    #object_two {
+        left: 65px;
+        top: 65px;
+        width: 70px;
+        height: 70px;
+        -webkit-animation-delay: 0.1s;
         animation-delay: 0.1s;
-    	}
+    }
 
-    #object_three{
-    	left: 55px;
-    	top: 55px;
-    	width: 90px;
-    	height: 90px;
-    	-webkit-animation-delay: 0.2s;
+    #object_three {
+        left: 55px;
+        top: 55px;
+        width: 90px;
+        height: 90px;
+        -webkit-animation-delay: 0.2s;
         animation-delay: 0.2s;
-    	}
-    #object_four{
-    	left: 45px;
-    	top: 45px;
-    	width: 110px;
-    	height: 110px;
-    	-webkit-animation-delay: 0.3s;
+    }
+
+    #object_four {
+        left: 45px;
+        top: 45px;
+        width: 110px;
+        height: 110px;
+        -webkit-animation-delay: 0.3s;
         animation-delay: 0.3s;
 
-    	}
+    }
 
     @-webkit-keyframes animate {
 
 
-    50% {
-    	-ms-transform: rotate(180deg);
-       	-webkit-transform: rotate(180deg);
-        transform: rotate(180deg);
-      }
+        50% {
+            -ms-transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
 
-    100% {
-    	-ms-transform: rotate(0deg);
-       	-webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
+        100% {
+            -ms-transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
 
     }
 
     @keyframes animate {
 
-    50% {
-    	-ms-transform: rotate(180deg);
-       	-webkit-transform: rotate(180deg);
-        transform: rotate(180deg);
-      }
+        50% {
+            -ms-transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
 
-    100% {
-    	-ms-transform: rotate(0deg);
-       	-webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
+        100% {
+            -ms-transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
 
 
     }
-    </style>
-    <div id="loading" hidden="true">
-      <div id="loading-center">
+
+    .btngroup-enter-cancel {
+        margin-left: 10px;
+    }
+
+    #startScan_btn {
+        margin-top: -10px;
+        margin-bottom: 20px;
+    }
+
+    #btn-addrange {
+        margin-left: -20px;
+    }
+    #div-radiogroup{
+        display: none;
+    }
+    #div-range{
+        display: none;
+    }
+    #div-single{
+        display: none;
+    }
+    #targetType_sel_star{
+        width: 100px
+    }
+    #targetType_sel_end{
+        width: 100px
+    }
+    #targetType_sel_single{
+        width: 100px
+    }
+</style>
+<div id="loading" hidden="true">
+    <div id="loading-center">
         <div id="loading-center-absolute">
-          <div class="object" id="object_four"></div>
-          <div class="object" id="object_three"></div>
-          <div class="object" id="object_two"></div>
-          <div class="object" id="object_one"></div>
+            <div class="object" id="object_four"></div>
+            <div class="object" id="object_three"></div>
+            <div class="object" id="object_two"></div>
+            <div class="object" id="object_one"></div>
         </div>
-      </div>
     </div>
+</div>
 </div>
 <% include nmap_exec_js %>
 <!-- /.内容-->

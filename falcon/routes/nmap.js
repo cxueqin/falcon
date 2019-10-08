@@ -5,6 +5,7 @@
  *
  * 本软件在GNU LGPL-V2.1协议下发布，欢迎使用.
  */
+const debug = require('debug')('routes_nmap');
 var express = require('express');
 var router = express.Router();
 require('./common');
@@ -26,8 +27,17 @@ router.get('/ui/nmap/exec', function(req, res){
 });
 
 router.post('/api/nmap', function(req, res){
+  debug('req.body=%j',req.body)
+  let scan
+  if (req.body.spec){
+    debug('req.body.spec=%j', req.body.spec)
+    scan = new Nmap.NmapScan(req.body.target, req.body.spec)
+  } else {
+    scan = new Nmap.NmapScan(req.body.target)
+  }
+
   //TODO:处理参数异常情况
-  var scan = new Nmap.NmapScan(req.body.target);
+
   var result = manager.addResult(scan);
   scan.startScan();
   scan.on('complete', function (data) {
