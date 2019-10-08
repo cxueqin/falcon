@@ -1,167 +1,310 @@
 <script>
-$(document).ready(function(){
-    $("#startScan_btn").click(function(){
-		var table = document.getElementById("scan_data");
-		var isFirst = true;
-		if(table.rows.length !== 1){
-			$("#scan_data").find("tr").each(function(){
-				if(!isFirst)
-					$(this).remove();
-				else
-					isFirst = false;
-			});
-		}
-		var scanIp = $("input[name='scan']").val();
-		var targetType = $("#targetType_sel option:selected").text();
-		if(scanIp.length === 0){
-			alert("请输入扫描目标IP");
+  //添加条件
+  $('#btn-addrange').click(function () {
+    let check = $('#radio1').is(':checked')
+    $('.rush-input').val('')
+    if (check) {
+      $('#div-single').css('display', 'none')
+      $('#div-radiogroup').css('display', 'block')
+      $('#div-range').css('display', 'block')
+    } else {
+      $('#div-range').css('display', 'none')
+      $('#div-radiogroup').css('display', 'block')
+      $('#div-single').css('display', 'block')
+
+    }
+
+  });
+  $("input[type=radio][name=radioOptions]").click(function () {
+    let check = $('#radio1').is(':checked')
+    $('.rush-input').val('')
+    if (check) {
+      $('#div-single').css('display', 'none')
+      $('#div-radiogroup').css('display', 'block')
+      $('#div-range').css('display', 'block')
+    } else {
+      $('#div-range').css('display', 'none')
+      $('#div-radiogroup').css('display', 'block')
+      $('#div-single').css('display', 'block')
+    }
+  });
+
+  function closeAddRange() {
+    $('.rush-input').val('')
+    $('#div-range').css('display', 'none')
+    $('#div-radiogroup').css('display', 'none')
+    $('#div-single').css('display', 'none')
+  }
+
+  function cancelRange(e) {
+    e.parentNode.remove()
+  }
+
+  function addRange() {
+    let begin = $('#targetType_sel_star').val()
+    let end = $('#targetType_sel_end').val()
+    if (!begin || !end) {
+      alert("开始端口或结束端口未填写!")
+      return
+    }
+    if (!/^[0-9]+$/.test(begin) || !/^[0-9]+$/.test(end)) {
+      alert("开始端口和结束端口都需为数字,请正确输入!")
+      return
+    }
+    if (parseInt(begin) >= parseInt(end)) {
+      alert("开始端口需小于结束端口,请正确输入!")
+      return
+    }
+    if (begin > 65535 || begin < 1 || end > 65535 || end < 1) {
+      alert("端口范围应在1-65535之间,请正确输入!")
+      return
+    }
+    let msg = begin + '-' + end
+    addSpan(msg, begin, end)
+  }
+
+  function addSingle() {
+    let singlePort = $('#targetType_sel_single').val()
+    if (!singlePort) {
+      alert("端口号未填写!")
+      return
+    }
+    if (!/^[0-9]+$/.test(singlePort)) {
+      alert("端口号需为数字,请正确输入!")
+      return
+    }
+    if (singlePort > 65535 || singlePort < 1) {
+      alert("端口范围应在1-65535之间,请正确输入!")
+      return
+    }
+    let msg = singlePort
+    addSpan(msg, msg)
+  }
+
+  function addSpan(msg, begin, end) {
+    if (!end) {
+      end = ""
+    }
+
+    var i = $('<i class="icon icon-times range-cancel" onclick="cancelRange(this)"></i>')
+    var range_span = $('<span class="label range-span" style="margin-right:5px;margin-top:5px" begin="' + begin + '" end="' + end + '">' + msg + '</span>')
+    range_span.append(i)
+    $('#rangeBar').append(range_span)
+    closeAddRange()
+  }
+
+
+  $(document).ready(function () {
+    $("#startScan_btn").click(function () {
+      var table = document.getElementById("scan_data");
+      var isFirst = true;
+      if (table.rows.length !== 1) {
+        $("#scan_data").find("tr").each(function () {
+          if (!isFirst)
+            $(this).remove();
+          else
+            isFirst = false;
+        });
+      }
+      var scanIp = $("input[name='scan']").val();
+      // var targetType = $("#targetType_sel option:selected").text();
+      // var begin = $("#targetType_sel_star").val();
+      // var end = $("#targetType_sel_end").val();
+      // if (!/^[0-9]*$/.test(begin) && begin != '') {
+      // 	if (begin < 1 || begin > 65533) {
+      // 		alert("起始端口号范围应在1-65533之间!")
+      // 		return
+      // 	}
+      // 	alert("请正确输入开始端口号")
+      // 	return
+      // }
+      // if (!/^[0-9]*$/.test(end) && end != '') {
+      // 	if (end < 1 || end > 65533) {
+      // 		alert("结束端口号范围应在1-65533之间!")
+      // 		return
+      // 	}
+      // 	alert("请正确输入结束端口号")
+      // 	return
+      // }
+      // if (begin != '' && end != '' && parseInt(end) < parseInt(begin)) {
+      // 	alert("起始端口号必须小于结束端口号!")
+      // 	return
+      // }
+
+      let rangeArr = new Array()
+      range_span = $('.range-span')
+      $.each(range_span, function (index, value) {
+        let begin = $(this).attr('begin')
+        if (!$(this).attr('end')) {
+          rangeArr.push(begin)
+        } else {
+          let end = $(this).attr('end')
+          let rangeBody = {
+            begin: begin,
+            end: end
+          }
+          rangeArr.push(rangeBody)
         }
-		else{
+      })
+      console.log("rangeArr:", rangeArr)
+
+      if (scanIp.length === 0) {
+        return alert("请输入扫描目标IP");
+      }
+
+      let portData
+      if (range_span.length == 0) {
+        portData = {
+          target: scanIp
+        }
+
+      } else {
+        portData = {
+          target: scanIp,
+          spec: rangeArr
+        }
+
+      }
+ 
       $.ajax({
         url: "/api/nmap",
-        data: {
-          target: scanIp,
-          spec: targetType
-          },
+        contentType: 'application/json',
+        data: JSON.stringify(portData),
         type: "POST",
-        dataType : "json",
+        dataType: "json",
       })
 
-      .done(function( json ) {
-        setTimeout(function () { pullExec(json.id) } , 1000);
-				$("#loading").modal('show');
+        .done(function (json) {
+          setTimeout(function () { pullExec(json.id) }, 1000);
+          $("#loading").modal('show');
+        })
+        // Code to run if the request fails; the raw request and
+        // status codes are passed to the function
+        .fail(function (xhr, status, errorThrown) {
+          alert("Sorry, there was a problem!");
+          console.log("Error: " + errorThrown);
+          console.log("Status: " + status);
+          console.dir(xhr);
+        })
+
+    });
+  });
+
+
+  function pullExec(id) {
+    $.ajax({
+      url: "/api/nmap",
+      data: {
+        id: id
+      },
+      type: "GET",
+      dataType: "json",
+    })
+
+      .done(function (json) {
+        if (json.status == "running") {
+          setTimeout(function () { pullExec(json.id) }, 1000);
+        } else {
+          $("#loading").modal('hide');
+          displayResult(json);
+        }
       })
       // Code to run if the request fails; the raw request and
       // status codes are passed to the function
-      .fail(function( xhr, status, errorThrown ) {
-        alert( "Sorry, there was a problem!" );
-        console.log( "Error: " + errorThrown );
-        console.log( "Status: " + status );
-        console.dir( xhr );
+      .fail(function (xhr, status, errorThrown) {
+        alert("Sorry, there was a problem!");
+        console.log("Error: " + errorThrown);
+        console.log("Status: " + status);
+        console.dir(xhr);
       })
-
-		}
-	});
-});
-
-
-function pullExec(id) {
-  $.ajax({
-    url: "/api/nmap",
-    data: {
-      id: id
-      },
-    type: "GET",
-    dataType : "json",
-  })
-
-  .done(function( json ) {
-    if (json.status == "running") {
-      setTimeout(function (){ pullExec(json.id) } , 1000);
-    }else {
-			$("#loading").modal('hide');
-      displayResult(json);
-    }
-  })
-  // Code to run if the request fails; the raw request and
-  // status codes are passed to the function
-  .fail(function( xhr, status, errorThrown ) {
-    alert( "Sorry, there was a problem!" );
-    console.log( "Error: " + errorThrown );
-    console.log( "Status: " + status );
-    console.dir( xhr );
-  })
-}
-
-function displayResult(json) {
-  var obj = json;
-  var table = document.getElementById("scan_data");
-  for (var i =  0 , len = obj.data[0].openPorts.length; i < len ; i++) {
-    var currentRow = table.rows.length;
-    var row = table.insertRow(currentRow);
-            var cell0 = row.insertCell(0);
-		var portObj = obj.data[0].openPorts[i];
-    cell0.innerHTML = portObj.port.portid;
-    var cell1 = row.insertCell(1);
-    cell1.innerHTML = portObj.port.protocol;
-    var cell2 = row.insertCell(2);
-    cell2.innerHTML = portObj.service.name;
-    var cell3 = row.insertCell(3);
-    cell3.innerHTML = portObj.state.state;
-    var cell4 = row.insertCell(4);
-    cell4.innerHTML = 'true';
-		/*
-    if (obj.target.portList[i].isLegal == true){
-      row.style.color = "red";
-    }
-		*/
   }
-}
 
-
-function downloadScanData(){
-	var xmlhttp;
-	var t ;
-	if(window.XMLHttpRequest)
-	{
-		xmlhttp = new XMLHttpRequest();
-
-	}else{
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange = function(){
-		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-			var obj = JSON.parse(xmlhttp.responseText);
-			if(obj.status === "updating"){
-				$("#update_modal").modal('show');
-			}else{
-				$("#update_modal").modal('hide');
-				clearTimeout(t);
-				showScanData();
-			}
+  function displayResult(json) {
+    var obj = json;
+    var table = document.getElementById("scan_data");
+    for (var i = 0, len = obj.data[0].openPorts.length; i < len; i++) {
+      var currentRow = table.rows.length;
+      var row = table.insertRow(currentRow);
+      var cell0 = row.insertCell(0);
+      var portObj = obj.data[0].openPorts[i];
+      cell0.innerHTML = portObj.port.portid;
+      var cell1 = row.insertCell(1);
+      cell1.innerHTML = portObj.port.protocol;
+      var cell2 = row.insertCell(2);
+      cell2.innerHTML = portObj.service.name;
+      var cell3 = row.insertCell(3);
+      cell3.innerHTML = portObj.state.state;
+      var cell4 = row.insertCell(4);
+      cell4.innerHTML = 'true';
+			/*
+		if (obj.target.portList[i].isLegal == true){
+		  row.style.color = "red";
 		}
-	}
-	xmlhttp.open("GET","/scanLoading.asp?function=downloadScanData",true);
-	xmlhttp.send();
-	t = setTimeout('downloadScanData()' , 1000);
-}
+			*/
+    }
+  }
 
-function showScanData(){
-	var xmlhttp;
-	var t ;
-	if(window.XMLHttpRequest)
-	{
-		xmlhttp = new XMLHttpRequest();
 
-	}else{
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange = function(){
-		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-			var obj = JSON.parse(xmlhttp.responseText);
-			var table = document.getElementById("scan_data");
-			for(var i =  0 , len = obj.target.portList.length; i < len ; i++)
-			{
-				var currentRow = table.rows.length;
-				var row = table.insertRow(currentRow);
-                var cell0 = row.insertCell(0);
-				cell0.innerHTML = obj.target.portList[i].portid;
-				var cell1 = row.insertCell(1);
-				cell1.innerHTML = obj.target.portList[i].protocol;
-				var cell2 = row.insertCell(2);
-				cell2.innerHTML = obj.target.portList[i].service;
-				var cell3 = row.insertCell(3);
-				cell3.innerHTML = obj.target.portList[i].state;
-				var cell4 = row.insertCell(4);
-				cell4.innerHTML = obj.target.portList[i].isLegal;
-				if(obj.target.portList[i].isLegal == true){
-					row.style.color = "red";
-				}
-		    }
-		}
-	}
-	xmlhttp.open("GET","/scanDataPort.asp?function=showScanData",true);
-	xmlhttp.send();
-}
+  function downloadScanData() {
+    var xmlhttp;
+    var t;
+    if (window.XMLHttpRequest) {
+      xmlhttp = new XMLHttpRequest();
+
+    } else {
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        var obj = JSON.parse(xmlhttp.responseText);
+        if (obj.status === "updating") {
+          $("#update_modal").modal('show');
+        } else {
+          $("#update_modal").modal('hide');
+          clearTimeout(t);
+          showScanData();
+        }
+      }
+    }
+    xmlhttp.open("GET", "/scanLoading.asp?function=downloadScanData", true);
+    xmlhttp.send();
+    t = setTimeout('downloadScanData()', 1000);
+  }
+
+  function showScanData() {
+    var xmlhttp;
+    var t;
+    if (window.XMLHttpRequest) {
+      xmlhttp = new XMLHttpRequest();
+
+    } else {
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        var obj = JSON.parse(xmlhttp.responseText);
+        var table = document.getElementById("scan_data");
+        for (var i = 0, len = obj.target.portList.length; i < len; i++) {
+          var currentRow = table.rows.length;
+          var row = table.insertRow(currentRow);
+          var cell0 = row.insertCell(0);
+          cell0.innerHTML = obj.target.portList[i].portid;
+          var cell1 = row.insertCell(1);
+          cell1.innerHTML = obj.target.portList[i].protocol;
+          var cell2 = row.insertCell(2);
+          cell2.innerHTML = obj.target.portList[i].service;
+          var cell3 = row.insertCell(3);
+          cell3.innerHTML = obj.target.portList[i].state;
+          var cell4 = row.insertCell(4);
+          cell4.innerHTML = obj.target.portList[i].isLegal;
+          if (obj.target.portList[i].isLegal == true) {
+            row.style.color = "red";
+          }
+        }
+      }
+    }
+    xmlhttp.open("GET", "/scanDataPort.asp?function=showScanData", true);
+    xmlhttp.send();
+  }
 
 </script>

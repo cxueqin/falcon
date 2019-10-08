@@ -22,18 +22,25 @@ var nodenmap;
     nodenmap.nmapLocation = "nmap";
     var NmapScan = (function (_super) {
         __extends(NmapScan, _super);
+        /**
+         * 
+         * @param {String|Array} range 主机地址
+         * @param {Array} inputArguments 端口范围实例:[{begin:开始端口,end:结束端口},90(指定端口),...,100]
+         */
         function NmapScan(range, inputArguments) {
             _super.call(this);
             this.command = [];
             this.nmapoutputXML = "";
             this.range = [];
-            this.arguments = ['-oX', '-'];
+            this.arguments = ['-Pn', '-oX', '-'];
             this.rawData = '';
             this.cancelled = false;
             this.scanTime = 0;
             this.error = null;
             this.scanTimeout = 0;
             this.commandConstructor(range, inputArguments);
+            debug('range=%j', range)
+            debug('inputArguments=%j', inputArguments)
             this.initializeChildProcess();
         }
         NmapScan.prototype.startTimer = function () {
@@ -49,20 +56,45 @@ var nodenmap;
             clearInterval(this.timer);
         };
         NmapScan.prototype.commandConstructor = function (range, additionalArguments) {
+            debug("additionalArguments=%j", additionalArguments)
+            var command_p = '-p'
             if (additionalArguments) {
-                if (!Array.isArray(additionalArguments)) {
-                    additionalArguments = additionalArguments.split(' ');
+                let len = 0;
+                if (Array.isArray(additionalArguments)) {
+                    len = additionalArguments.length
                 }
-                this.command = this.arguments.concat(additionalArguments);
-            }
-            else {
+                for (let i = 0; i < len; i++) {
+                    if (i > 0) {
+                        command_p += ','
+                    }
+                    let item = additionalArguments[i]
+                    debug('item', typeof (item))
+                    if (typeof item === 'object') {
+                        command_p += item.begin + '-' + item.end
+                    } else {
+                        command_p += item
+                    }
+                }
+                if (typeof additionalArguments === 'string') {
+                    command_p = additionalArguments
+                }
+
+                this.command = this.arguments.concat(command_p);
+
+
+            } else {
                 this.command = this.arguments;
+
             }
+
+
             if (!Array.isArray(range)) {
                 range = range.split(' ');
             }
+
             this.range = range;
             this.command = this.command.concat(this.range);
+            // debug('command=%j', this.command)
         };
         NmapScan.prototype.killChild = function () {
             this.cancelled = true;
@@ -127,7 +159,7 @@ var nodenmap;
                     _this.rawJSON = result;
                     results = _this.convertRawJsonToScanResults(_this.rawJSON, function (err) {
                         //console.log(_this.rawJSON);
-						//console.log(`Error converting raw json to cleans can results ${err}`);
+                        //console.log(`Error converting raw json to cleans can results ${err}`);
                         _this.emit('error', "Error converting raw json to cleans can results: " + err + ": " + _this.rawJSON);
                     });
                     debug("scanComplete: %j", results)
@@ -181,14 +213,16 @@ var nodenmap;
                             var serviceNode = xmlInput[hostLoopIter]["ports"][0]["port"][portLoopIter]['service'];
                             /*Note: service probe may not be available when port number is not ordinary*/
                             if (serviceNode) {
-                              var serviceItem = serviceNode[0]['$'];
-                            }else {
-                              var serviceItem = { name: 'unknown'};
+                                var serviceItem = serviceNode[0]['$'];
+                            } else {
+                                var serviceItem = { name: 'unknown' };
                             }
                             tempHostList[hostLoopIter].openPorts.push(
-                              {"port": portItem,
-                              "state": stateItem,
-                              "service": serviceItem});
+                                {
+                                    "port": portItem,
+                                    "state": stateItem,
+                                    "service": serviceItem
+                                });
                         }
                     }
                     if (xmlInput[hostLoopIter].os && xmlInput[hostLoopIter].os[0].osmatch && xmlInput[hostLoopIter].os[0].osmatch[0].$.name) {
